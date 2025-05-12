@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}NFC Solutions - NFC Labs{% endblock %}
+
+{% block content %}
+
+<div class="container py-5 slideIn from-left">
+  <h1 class="page-title">
+    Smart NFC Solutions
+  </h1>
+
+  <div class="row mb-5">
+    <div class="col-lg-8">
+      <p class="intro-text">
+        NFC Labs is a dynamic team of NFC solution specialists with years of experience.
+        We focus on innovative and efficient solutions that save you time and money while unlocking new opportunities for your business.<br><br>
+        Our goal is to help you easily and effectively implement cutting-edge solutions that deliver real value.
+      </p>
+    </div>
+  </div>
+
+  <div class="solutions-row slideIn from-left">
+    {% if solutions %}
+      {% for solution in solutions %}
+        <div class="solution-card">
+          {% if solution.image %}
+            <img src="{{ solution.image.url }}" alt="{{ solution.name }}" class="solution-img">
+          {% else %}
+            <img src="{% static 'img/solution-placeholder.jpg' %}" alt="{{ solution.name }}" class="solution-img">
+          {% endif %}
+          <div class="solution-body">
+            <h3 class="solution-title">{{ solution.name }}</h3>
+            <p class="solution-text">{{ solution.description }}</p>
+            <a href="{% url 'solution_detail' slug=solution.slug %}" class="button-slide">
+              <span class="button-slide-decor"></span>
+              <span class="button-slide-content">
+                <span class="button-slide__icon">
+                  <i class="fas fa-info-circle"></i>
+                </span>
+                <span class="button-slide__text">Learn More</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+>>>>>>> 7f1ad5b42a733f5a9714b6a577512970f3f1e2fa

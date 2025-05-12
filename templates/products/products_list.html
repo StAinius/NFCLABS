@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Categories{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 slideIn from-left">
+    <div class="content-container">
+        <h1 class="page-title">Product Categories</h1>
+        <p class="intro-text">
+            Discover our premium selection of products designed to meet all your needs. All items are <span class="highlight">available for immediate purchase</span> and come with our quality guarantee. Browse through our categories below to find exactly what you're looking for - from everyday essentials to specialized equipment, we've got you covered with competitive prices and excellent customer service.
+        </p>
+        
+        <div class="row justify-content-center">
+            {% for category in categories %}
+            <div class="col-12 from-left">
+                <div class="card shadow border-0 category-card">
+                    <div class="row g-0">
+                        {% if category.image %}
+                        <div class="col-md-2"> 
+                            <div class="image-wrapper">
+                                <img src="{{ category.image.url }}" class="category-image" alt="{{ category.name }}">
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-{% if category.image %}10{% else %}12{% endif %}"> 
+                            <div class="card-body card-content py-4">
+                                <div>
+                                    <h5 class="category-title">{{ category.name }}</h5>
+                                    <div class="category-description">{{ category.description|safe }}</div>
+                                </div>
+                                <div>
+                                    <a href="{% url 'products_category' category.slug %}" class="button-slide">
+                                        <span class="button-slide-decor"></span>
+                                        <span class="button-slide-content">
+                                          <span class="button-slide__icon">
+                                            <i class="fas fa-info-circle"></i>
+                                          </span>
+                                          <span class="button-slide__text">View Products</span>
+                                        </span>
+                                      </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

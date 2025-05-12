@@ -1,0 +1,165 @@
+.slideIn {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  opacity: 0;
+ }
+ 
+ .slideIn.from-left {
+  animation-name: slideInLeft;
+ }
+ 
+ @keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+ }
+ 
+ @media (max-width: 767px) {
+  .slideIn {
+    animation: slideInLeft 0.4s forwards;
+    opacity: 1 !important;
+  }
+  
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+ }
+
+
+ @keyframes flip-scale-up-diag-2 {
+  0% {
+    -webkit-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+  }
+  100% {
+    -webkit-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+}
+
+
+
+/* Basic button structure remains the same */
+.button-slide {
+  text-decoration: none;
+  line-height: 1;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(25, 169, 157, 0.2);
+  background-color: #fff;
+  color: var(--nfc-dark-blue);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  margin-bottom: 0.5rem;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Other button styles remain the same */
+.button-slide-decor {
+  position: absolute;
+  inset: 0;
+  background-color: var(--nfc-teal);
+  transform: translateX(-100%);
+  transition: transform .3s;
+  z-index: 0;
+}
+
+.button-slide-content {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Customize the icon area for each file type */
+.button-slide__icon {
+  width: 40px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+}
+
+/* Default style */
+.button-slide__icon {
+  background-color: var(--nfc-teal);
+}
+
+/* File type specific backgrounds */
+.button-slide__icon.file-pdf {
+  background-color: #FF5252;
+}
+
+.button-slide__icon.file-excel {
+  background-color: #1D6F42;
+}
+
+.button-slide__icon.file-word {
+  background-color: #2B579A;
+}
+
+.button-slide__icon.file-ppt {
+  background-color: #D24726;
+}
+
+.button-slide__icon.file-text {
+  background-color: #4285F4;
+}
+
+.button-slide__icon.file-zip {
+  background-color: #FFA000;
+}
+
+.button-slide__icon.file-image {
+  background-color: #9C27B0;
+}
+
+.button-slide__icon.file-spreadsheet {
+  background-color: #0F9D58;
+}
+
+.button-slide__icon.file-default {
+  background-color: #757575;
+}
+
+/* Icon color */
+.button-slide__icon i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.button-slide__text {
+  display: inline-block;
+  transition: color .2s;
+  padding: 2px 1.5rem 2px;
+  padding-left: .75rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+.button-slide:hover .button-slide__text {
+  color: #fff;
+}
+
+.button-slide:hover .button-slide-decor {
+  transform: translate(0);
+}
+

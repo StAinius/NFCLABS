@@ -1,8 +1,12 @@
+
 {% extends "base.html" %}
 
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
+<div id="successMessage" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+  Message sent successfully!
+</div>
 <div class="container">
   <a href="{% url 'products_category' product.category.slug %}" class="btn btn-sm mb-3" style="color: var(--nfc-teal); font-size: 1.5rem;">
     <i class="fa fa-arrow-left"></i> Back to {{ product.category.name }}
@@ -11,31 +15,34 @@
   <div class="mt-4 slideIn from-left">
     <div class="row mb-4">
       <div class="col-12 text-left">
-        <h1>{{ product.name }}</h1>
+        <h1 class="mb-4">{{ product.name }}</h1>
               
         <div class="product-gallery mt-3">
-          <div class="main-image-container me-2">
+          <div class="main-image-container">
             <button class="nav-arrow nav-prev" onclick="prevImage()">&#10094;</button>
             {% if product.images.exists %}
               {% with main_image=product.images.filter.first %}
-                <img id="main-product-image" src="{{ main_image.image.url }}" alt="{{ product.name }}" class="img-fluid rounded" onclick="openLightbox(currentImageIndex)">
+                <img id="main-product-image" src="{{ main_image.image.url }}" alt="{{ product.name }}" class="img-fluid rounded">
               {% endwith %}
             {% elif product.image %}
-              <img id="main-product-image" src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded" onclick="openLightbox(currentImageIndex)">
+              <img id="main-product-image" src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded">
             {% endif %}
             <button class="nav-arrow nav-next" onclick="nextImage()">&#10095;</button>
+            <div class="mobile-image-counter">
+              <span id="currentImageNum">1</span>/<span id="totalImages">1</span>
+            </div>
           </div>
           
           <div class="product-thumbnails">
             {% if product.image %}
-              <div class="thumbnail-item mb-2">
+              <div class="thumbnail-item">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="thumbnail active" 
                     onclick="changeMainImage('{{ product.image.url }}', this)">
               </div>
             {% endif %}
             
             {% for img in product.images.all %}
-              <div class="thumbnail-item mb-2">
+              <div class="thumbnail-item">
                 <img src="{{ img.image.url }}" alt="{{ img.title|default:product.name }}" class="thumbnail"
                     onclick="changeMainImage('{{ img.image.url }}', this)">
               </div>
@@ -45,15 +52,6 @@
       </div>
     </div>
     
-    <!-- Lightbox Modal -->
-    <div id="image-lightbox" class="lightbox">
-      <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-      <img class="lightbox-content" id="lightbox-img">
-      <div class="lightbox-caption">{{ product.name }}</div>
-      <button class="lightbox-nav lightbox-prev" onclick="lightboxPrev()">&#10094;</button>
-      <button class="lightbox-nav lightbox-next" onclick="lightboxNext()">&#10095;</button>
-    </div>
-   
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         let currentImageIndex = 0;
@@ -73,6 +71,7 @@
           document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
           
           updateActiveThumbnail();
+          updateMobileCounter();
           window.currentImageIndex = currentImageIndex;
         }
         
@@ -81,6 +80,7 @@
           document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
           
           updateActiveThumbnail();
+          updateMobileCounter();
           window.currentImageIndex = currentImageIndex;
         }
         
@@ -92,6 +92,13 @@
               thumbnail.classList.remove('active');
             }
           });
+        }
+        
+        function updateMobileCounter() {
+          if (window.innerWidth <= 768) {
+            document.getElementById('currentImageNum').textContent = currentImageIndex + 1;
+            document.getElementById('totalImages').textContent = imageUrls.length;
+          }
         }
         
         window.nextImage = nextImage;
@@ -107,134 +114,125 @@
           
           currentImageIndex = Array.from(thumbnailElements).indexOf(clickedThumbnail);
           window.currentImageIndex = currentImageIndex;
+          updateMobileCounter();
         };
-        
-        // Lightbox functionality
-        window.openLightbox = function(imageIndex) {
-          const lightbox = document.getElementById('image-lightbox');
-          const lightboxImg = document.getElementById('lightbox-img');
-          
-          lightboxImg.src = imageUrls[imageIndex];
-          lightbox.style.display = 'block';
-          
-          // Prevent scrolling on body
-          document.body.style.overflow = 'hidden';
-        };
-        
-        window.closeLightbox = function() {
-          document.getElementById('image-lightbox').style.display = 'none';
-          
-          // Re-enable scrolling on body
-          document.body.style.overflow = 'auto';
-        };
-        
-        window.lightboxNext = function() {
-          currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
-          document.getElementById('lightbox-img').src = imageUrls[currentImageIndex];
-          window.currentImageIndex = currentImageIndex;
-          updateActiveThumbnail();
-        };
-        
-        window.lightboxPrev = function() {
-          currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
-          document.getElementById('lightbox-img').src = imageUrls[currentImageIndex];
-          window.currentImageIndex = currentImageIndex;
-          updateActiveThumbnail();
-        };
-        
-        // Close lightbox when clicking outside the image
-        document.getElementById('image-lightbox').addEventListener('click', function(event) {
-          if (event.target === this) {
-            closeLightbox();
-          }
-        });
-        
-        // Keyboard navigation for lightbox
-        document.addEventListener('keydown', function(event) {
-          if (document.getElementById('image-lightbox').style.display === 'block') {
-            if (event.key === 'Escape') {
-              closeLightbox();
-            } else if (event.key === 'ArrowRight') {
-              lightboxNext();
-            } else if (event.key === 'ArrowLeft') {
-              lightboxPrev();
-            }
-          }
-        });
         
         const firstThumbnail = document.querySelector('.thumbnail');
         if (firstThumbnail) {
           firstThumbnail.classList.add('active');
         }
+        
+        updateMobileCounter();
+        
+        function handleMobileView() {
+          const isMobile = window.innerWidth <= 768;
+          const mainImage = document.getElementById('main-product-image');
+          const mobileCounter = document.querySelector('.mobile-image-counter');
+          
+          if (isMobile) {
+            mobileCounter.style.display = 'block';
+            updateMobileCounter();
+            
+            if (!mainImage.hasAttribute('data-touch-initialized')) {
+              let touchStartX = 0;
+              let touchEndX = 0;
+              
+              mainImage.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+              }, false);
+              
+              mainImage.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchEndX < touchStartX - 50) {
+                  nextImage();
+                }
+                if (touchEndX > touchStartX + 50) {
+                  prevImage();
+                }
+              }, false);
+              
+              mainImage.setAttribute('data-touch-initialized', 'true');
+            }
+          } else {
+            mobileCounter.style.display = 'none';
+          }
+        }
+        
+        handleMobileView();
+        window.addEventListener('resize', handleMobileView);
       });
     </script>
   </div>
     
-  <div class="row justify-content-left">
-    <div class="col-lg-10">
+  <div class="row justify-content-between slideIn from-left">
+    <div class="col-lg-7">
       <div class="description-container mb-5">
         {{ product.description|safe }}
       </div>
-    </div>
-     
-
-    {% if product.files.all %}
-    <div class="border-top pt-4 mb-5">
-      <h3 class="h5 mb-3">Documentation</h3>
-      <ul class="list-unstyled">
-        {% for file in product.files.all %}
-          <li class="mb-3">
-            {% with file_ext=file.file.name|slice:"-3:" %}
-              <a href="{{ file.file.url }}" class="button-slide" download>
-                <span class="button-slide-decor"></span>
-                <span class="button-slide-content">
-                  <span class="button-slide__icon">
-                    {% if file_ext == 'pdf' %}
-                      <i class="bi bi-file-earmark-pdf file-icon-pdf"></i>
-                    {% elif file_ext == 'xls' or file_ext == 'lsx' %}
-                      <i class="bi bi-file-earmark-excel file-icon-excel"></i>
-                    {% elif file_ext == 'doc' or file_ext == 'ocx' %}
-                      <i class="bi bi-file-earmark-word file-icon-word"></i>
-                    {% elif file_ext == 'ppt' or file_ext == 'ptx' %}
-                      <i class="bi bi-file-earmark-ppt file-icon-ppt"></i>
-                    {% elif file_ext == 'txt' %}
-                      <i class="bi bi-file-earmark-text file-icon-text"></i>
-                    {% elif file_ext == 'zip' or file_ext == 'rar' %}
-                      <i class="bi bi-file-earmark-zip file-icon-zip"></i>
-                    {% elif file_ext == 'png' or file_ext == 'jpg' or file_ext == 'jpeg' or file_ext == 'gif' %}
-                      <i class="bi bi-file-earmark-image file-icon-image"></i>
-                    {% elif file_ext == 'csv' %}
-                      <i class="bi bi-file-earmark-spreadsheet file-icon-spreadsheet"></i>
-                    {% else %}
-                      <i class="bi bi-file-earmark file-icon-default"></i>
-                    {% endif %}
+      
+      {% if product.files.all %}
+      <div class="border-top pt-4 mb-5">
+        <h3 class="h5 mb-3">Documentation</h3>
+        <ul class="list-unstyled">
+          {% for file in product.files.all %}
+            <li class="mb-3">
+              {% with file_ext=file.file.name|slice:"-3:" %}
+                <a href="{{ file.file.url }}" class="button-slide" download>
+                  <span class="button-slide-decor"></span>
+                  <span class="button-slide-content">
+                    <span class="button-slide__icon">
+                      {% if file_ext == 'pdf' %}
+                        <i class="bi bi-file-earmark-pdf file-icon-pdf"></i>
+                      {% elif file_ext == 'xls' or file_ext == 'lsx' %}
+                        <i class="bi bi-file-earmark-excel file-icon-excel"></i>
+                      {% elif file_ext == 'doc' or file_ext == 'ocx' %}
+                        <i class="bi bi-file-earmark-word file-icon-word"></i>
+                      {% elif file_ext == 'ppt' or file_ext == 'ptx' %}
+                        <i class="bi bi-file-earmark-ppt file-icon-ppt"></i>
+                      {% elif file_ext == 'txt' %}
+                        <i class="bi bi-file-earmark-text file-icon-text"></i>
+                      {% elif file_ext == 'zip' or file_ext == 'rar' %}
+                        <i class="bi bi-file-earmark-zip file-icon-zip"></i>
+                      {% elif file_ext == 'png' or file_ext == 'jpg' or file_ext == 'jpeg' or file_ext == 'gif' %}
+                        <i class="bi bi-file-earmark-image file-icon-image"></i>
+                      {% elif file_ext == 'csv' %}
+                        <i class="bi bi-file-earmark-spreadsheet file-icon-spreadsheet"></i>
+                      {% else %}
+                        <i class="bi bi-file-earmark file-icon-default"></i>
+                      {% endif %}
+                    </span>
+                    <span class="button-slide__text">{{ file.title|default:"Download File" }}</span>
                   </span>
-                  <span class="button-slide__text">{{ file.title|default:"Download File" }}</span>
-                </span>
-              </a>
-            {% endwith %}
-          </li>
-        {% endfor %}
-      </ul>
+                </a>
+              {% endwith %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
-
-    <div class="card border-0 shadow-sm mb-5">
-      <div class="card-body p-4">
-        <h2 class="h4 mb-4">Inquire about {{ product.name }}</h2>
-        <form id="productContactForm" method="post" action="{% url 'product_detail' slug=product.slug %}">
-          {% csrf_token %}
-          <input type="hidden" name="product_interest" value="{{ product.name }}">
-          <div class="row g-3">
-            <div class="col-12">
-              <label for="email" class="form-label">Email *</label>
+    
+    <div class="col-lg-5">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+          <h3 class="h4 mb-0">Inquire about {{ product.name }}</h3>
+        </div>
+        <div class="card-body p-4">
+          <form id="contactForm" method="post" action="{% url 'product_detail' slug=product.slug %}">
+            {% csrf_token %}
+            <input type="hidden" name="product_interest" value="{{ product.name }}">
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
               <input type="email" class="form-control" id="email" name="email" required>
             </div>
-            <div class="col-12">
-              <label for="message" class="form-label">Message *</label>
-              <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            
+            <div class="mb-3">
+              <label for="message" class="form-label">Your Message <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="message" name="message" rows="5" placeholder="How can we help you with {{ product.name }}?" required></textarea>
             </div>
-            <div class="col-12">
+            
+            <div class="mb-4">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
                 <label class="form-check-label" for="privacy">
@@ -242,18 +240,19 @@
                 </label>
               </div>
             </div>
-            <div class="col-12 mt-3">
-              <div id="recaptcha-container"></div>
-              <small class="text-muted">Please complete the CAPTCHA to verify you're not a robot</small>
+            
+            <div class="captcha-container mb-4">
+              <div id="recaptcha-container" class="d-flex justify-content-center"></div>
+              <p class="captcha-text text-center text-muted small mt-2">Please complete the CAPTCHA to verify you're not a robot</p>
             </div>
-            <div class="col-12 mt-4">
-              <button type="submit" class="btn btn-primary w-100" style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">Send Message</button>
-            </div>
-          </div>
-        </form>
+            
+            <button type="submit" class="btn btn-primary w-100" style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
+              <i class="fa fa-paper-plane me-2"></i>Send Message
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

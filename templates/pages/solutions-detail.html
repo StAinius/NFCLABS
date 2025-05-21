@@ -4,73 +4,174 @@
 {% block title %}{{ solution.name }} - NFC Labs{% endblock %}
 
 {% block content %}
-<div class="container py-5 slideIn from-left from-left">
-  {% if messages %}
+<div id="successMessage"
+    style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+    Message sent successfully!
+</div>
+<div class="container slideIn from-left narrow-container ">
+    <div class="content-container">
+        <a href="{% url 'solutions' %}" class="btn btn-sm mb-3" style="color: var(--nfc-teal); font-size: 1.5rem;">
+            <i class="fa fa-arrow-left"></i> Back to solutions
+        </a>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                {% if solution.image %}
+                <img src="{{ solution.image.url }}" alt="{{ solution.name }}"
+                    class="solution-hero-image">
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">{{ solution.name }}</h1>
+                <p class="lead text-muted">{{ solution.description | safe }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 narrow-container">
+    {% if messages %}
     {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  {% endif %}
-  
-  <a href="{% url 'solutions' %}" class="btn btn-sm" style="color: var(--nfc-teal); font-size: 1.5rem;">
-    <i class="fa fa-arrow-left"></i> Back to solutions
-  </a>
-
-  <div class="row slideIn from-left from-left">
-    <div class="col-lg-10 mx-auto">
-      <h1 class="mb-4">{{ solution.name }}</h1>
-
-      {% if solution.image %}
-        <img src="{{ solution.image.url }}" alt="{{ solution.name }}" class="img-fluid rounded mb-4">
-      {% endif %}
-
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4">
-          <h2 class="h4 mb-3">Features & Benefits</h2>
-          {{ solution.details|safe }}
-        </div>
-      </div>
-
-      <div class="card border-0 shadow-sm">
-        <div class="card-body p-4">
-          <h2 class="h4 mb-4">Contact Us about {{ solution.name }}</h2>
-          <form id="contactForm" method="post" action="{% url 'solution_detail' slug=solution.slug %}">
-            {% csrf_token %}
-            <input type="hidden" name="product_interest" value="{{ solution.name }}">
-            <div class="row g-3">
-              <div class="col-12">
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-              </div>
-              <div class="col-12">
-                <label for="message" class="form-label">Message *</label>
-                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-              </div>
-              <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
-                  <label class="form-check-label" for="privacy">
-                    I agree to the processing of my personal data in accordance with the privacy policy
-                  </label>
-                </div>
-              </div>
-              <div class="col-12 mt-3">
-                <div id="recaptcha-container"></div>
-                <small class="text-muted">Please complete the CAPTCHA to verify you're not a robot</small>
-              </div>
-              <div class="col-12 mt-4">
-                <button type="submit" class="btn btn-primary w-100" style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
     </div>
-  </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div class="container py-5 slideIn from-left narrow-container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm sticky-top">
+                <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+                    <h2 class="h4 mb-0">Features & Benefits</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="solution-details">{{ solution.details|safe }}</div>
+                </div>
+
+                <div class="card border-0 shadow-sm mt-4 mx-4">
+                    <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+                        <h3 class="h4 mb-0">Solution Video</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/AS7aG6Iz9lA" title="{{ solution.name }} Video"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm sticky-top">
+                <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+                    <h3 class="h4 mb-0">Get in Touch</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form id="contactForm" method="post" action="{% url 'solution_detail' slug=solution.slug %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_interest" value="{{ solution.name }}">
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address <span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Your Message <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control" id="message" name="message" rows="4"
+                                placeholder="How can we help you with {{ solution.name }}?" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" style="width: 2.25rem;" type="checkbox" id="privacy"
+                                    name="privacy" required>
+                                <label class="form-check-label" for="privacy">
+                                    I agree to the processing of my personal data in accordance with the privacy policy
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="captcha-container mb-4">
+                            <div id="recaptcha-container" class="d-flex justify-content-center"></div>
+                            <p class="captcha-text text-center text-muted small mt-2">Please complete the CAPTCHA to
+                                verify you're not a robot</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100"
+                            style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
+                            <i class="fa fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 narrow-container">
+    <hr class="gray-divider mb-4">
+
+    <div class="content-module card shadow border-0 p-4 slideIn from-left">
+        <div class="ribbon"><span class="ribbon-text">You May Also Like</span></div>
+
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
+                <div class="showcase-item">
+                    {% if category.image %}
+                    <div class="media-container d-none d-sm-block">
+                        <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+                        <div class="hover-content">
+                            <h5 class="mobile-item-heading" title="{{ category.name }}">
+                                {{ category.name }}
+                            </h5>
+                            <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
+                                <span class="button-slide-decor"></span>
+                                <span class="button-slide-content smaller">
+                                    <span class="button-slide__icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>
+                                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mobile-product-card d-block d-sm-none">
+                        <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+                        <div class="mobile-product-info">
+                            <h5 class="item-heading" title="{{ category.name }}">
+                                {{ category.name }}
+                            </h5>
+                            <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
+                                View Products
+                                <span class="button-slide-decor"></span>
+                                <span class="button-slide-content smaller">
+                                    <span class="button-slide__icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>
+                                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -179,15 +179,23 @@
 }
 
 .product-thumbnail {
- width: 100px;
- height: 100px;
- object-fit: cover;
- border-radius: 8px;
- margin-bottom: 10px;
- transition: transform 0.2s ease;
- background-color: white;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.product-thumbnail img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
 .dropdown-item:hover .product-thumbnail {
  transform: scale(1.25);
 }

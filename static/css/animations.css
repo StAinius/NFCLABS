@@ -2,64 +2,64 @@
   animation-duration: 0.8s;
   animation-fill-mode: both;
   opacity: 0;
- }
- 
- .slideIn.from-left {
+}
+
+.slideIn.from-left {
   animation-name: slideInLeft;
- }
- 
- @keyframes slideInLeft {
+}
+
+@keyframes slideInLeft {
   0% {
     opacity: 0;
     transform: translateX(-30px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
   }
- }
- 
- @media (max-width: 767px) {
+}
+
+@media (max-width: 767px) {
   .slideIn {
     animation: slideInLeft 0.4s forwards;
     opacity: 1 !important;
   }
-  
+
   @keyframes slideInLeft {
     0% {
       opacity: 0;
       transform: translateX(-15px);
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
     }
   }
- }
+}
 
 
- @keyframes flip-scale-up-diag-2 {
+@keyframes flip-scale-up-diag-2 {
   0% {
     -webkit-transform: rotateX(-180deg);
     transform: rotateX(-180deg);
   }
+
   100% {
     -webkit-transform: rotateX(0);
     transform: rotateX(0);
   }
 }
 
-
-
-/* Basic button structure remains the same */
 .button-slide {
   text-decoration: none;
   line-height: 1;
-  border-radius: 1.5rem;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 15px rgba(25, 169, 157, 0.2);
-  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.158);
+  background-color: #ffffff;
   color: var(--nfc-dark-blue);
   border: none;
   cursor: pointer;
@@ -69,14 +69,27 @@
   max-width: 100%;
 }
 
-/* Other button styles remain the same */
+.button-slide__icon {
+  width: 40px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  background-color: var(--nfc-teal);
+  position: relative;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
 .button-slide-decor {
   position: absolute;
   inset: 0;
   background-color: var(--nfc-teal);
   transform: translateX(-100%);
-  transition: transform .3s;
+  transition: transform .4s;
   z-index: 0;
+  width: calc(100% - 40px);
+  left: 40px;
 }
 
 .button-slide-content {
@@ -86,22 +99,24 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  z-index: 1;
 }
 
-/* Customize the icon area for each file type */
-.button-slide__icon {
-  width: 40px;
-  height: 36px;
-  display: grid;
-  place-items: center;
+.button-slide {
+  font-size: 0;
 }
 
-/* Default style */
-.button-slide__icon {
-  background-color: var(--nfc-teal);
+.button-slide * {
+  font-size: initial;
 }
 
-/* File type specific backgrounds */
+.button-slide__text {
+  margin-left: 0;
+  padding-left: 0.75rem;
+}
+
+
+
 .button-slide__icon.file-pdf {
   background-color: #FF5252;
 }
@@ -162,4 +177,3 @@
 .button-slide:hover .button-slide-decor {
   transform: translate(0);
 }
-

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container mt-5 slideIn from-left">
+<div class="container slideIn from-left">
     <div class="content-container">
         <a href="{% url 'product_list' %}" class="btn btn-sm mb-3" style="color: var(--nfc-teal); font-size: 1.5rem;">
             <i class="fa fa-arrow-left"></i> Back to products
@@ -17,8 +17,8 @@
         
         <div class="row products-grid">
             {% for product in products %}
-            <div class="col-md-6 col-lg-5 product-wrapper from-left">
-                <div class="product-card shadow">
+            <div class="col-md-6 col-lg-6 product-wrapper from-left">
+                <div class="product-card">
                     <div class="product-image-container">
                         {% if product.main_image %}
                             <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="product-image">
@@ -37,6 +37,7 @@
                               </span>
                               <span class="button-slide__text">View Details</span>
                             </span>
+                            <a></a>
                         </a>
                     </div>
                 </div>

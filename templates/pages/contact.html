@@ -3,147 +3,178 @@
 {% block title %}Contact Us - NFC Labs{% endblock %}
 
 {% block content %}
-<div class="container py-5 slideIn from-left">
-  <div class="row mb-5">
-    <div class="col-lg-8">
-      <h1 class="mb-4">Contact Us</h1>
-      <p class="lead">Have questions about our NFC solutions? Interested in implementing NFC technology in your business? We're here to help.</p>
-      <p>Reach out to our team of experts to discuss how NFC technology can transform your business operations and customer experiences.</p>
-    </div>
-  </div>
+<div id="successMessage" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+  Message sent successfully!
+</div>
 
+<div class="container mt-5 slideIn from-left" style="max-width: 1200px;">
+  <div class="content-container">
+    {% if page_content %}
+      <h1 class="page-title">{{ page_content.title }}</h1>
+      <p class="intro-text">
+        <div class="rich-content">{{ page_content.content|safe }}</div>
+      </p>
+    {% endif %}
+  </div>
+  
   <div class="row">
     <div class="col-lg-6 mb-4 mb-lg-0">
-      <div class="card border-0 shadow-sm h-100">
-        <div class="card-body p-4">
-          <h2 class="h4 mb-4">Send Us a Message</h2>
-          <form id="contactForm" method="post">
-            {% csrf_token %}
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label for="name" class="form-label">Name *</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+      <div class="container">
+        <div class="unified-container">
+          <div class="col mb-1">
+            <div class="card border-0">
+              <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+                <h3 class="h4 mb-0">Send Us a Message</h3>
               </div>
-              <div class="col-md-6">
-                <label for="company" class="form-label">Company</label>
-                <input type="text" class="form-control" id="company" name="company">
-              </div>
-              <div class="col-md-6">
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-              </div>
-              <div class="col-md-6">
-                <label for="phone" class="form-label">Phone</label>
-                <input type="tel" class="form-control" id="phone" name="phone">
-              </div>
-              <div class="col-12">
-                <label for="subject" class="form-label">Subject *</label>
-                <input type="text" class="form-control" id="subject" name="subject" required>
-              </div>
-              <div class="col-12">
-                <label for="message" class="form-label">Message *</label>
-                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-              </div>
-              <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
-                  <label class="form-check-label" for="privacy">
-                    I agree to the processing of my personal data in accordance with the privacy policy
-                  </label>
-                </div>
-                <div class="col-12 mt-3">
-                  <div id="recaptcha-container"></div>
-                  <small class="text-muted">Please complete the CAPTCHA to verify you're not a robot</small>
-                </div>
-                
-              </div>
-              <div class="col-12 mt-4">
-                <button type="submit" class="btn btn-primary" style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">Send Message</button>
+              <div class="card-body p-4">
+                <form id="contactForm" method="post">
+                  {% csrf_token %}
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="company" class="form-label">Company</label>
+                      <input type="text" class="form-control" id="company" name="company">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Phone</label>
+                      <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label for="subject" class="form-label">Subject <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="subject" name="subject" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+                      <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <div class="col-12 mb-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
+                        <label class="form-check-label" for="privacy">
+                          I agree to the processing of my personal data in accordance with the privacy policy
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                      <div class="captcha-container">
+                        <div id="recaptcha-container" class="d-flex justify-content-center"></div>
+                        <p class="captcha-text text-center text-muted small mt-2">Please complete the CAPTCHA to verify you're not a robot</p>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary w-100" style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
+                        <i class="fa fa-paper-plane me-2"></i>Send Message
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-
+    
     <div class="col-lg-6">
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-4">
-          <h2 class="h4 mb-4">Contact Information</h2>
-          <div class="d-flex mb-4">
-            <div class="flex-shrink-0 me-3">
-              <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-envelope" viewBox="0 0 16 16">
-                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                </svg>
+      <div class="container">
+        <div class="unified-container">
+          <div class="col mb-1">
+            <div class="card border-0">
+              <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+                <h3 class="h4 mb-0">Contact Information</h3>
               </div>
-            </div>
-            <div>
-              <h3 class="h6 mb-1">Email</h3>
-              <p class="mb-0"><a href="mailto:info@nfclabs.com" class="text-decoration-none" style="color: var(--nfc-dark-blue);">info@nfclabs.com</a></p>
+              <div class="card-body p-4">
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Email</h3>
+                    <p class="mb-0"><a href="mailto:info@nfclabs.com" class="text-decoration-none" style="color: var(--nfc-dark-blue);">info@nfclabs.com</a></p>
+                  </div>
+                </div>
+                
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608a17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42a18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Phone</h3>
+                    <p class="mb-0"><a href="tel:+37062111527" class="text-decoration-none" style="color: var(--nfc-dark-blue);">+370 621 11527</a></p>
+                  </div>
+                </div>
+                
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Office</h3>
+                    <p class="mb-0">Vilnius, Lithuania</p>
+                  </div>
+                </div>
+                
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-building" viewBox="0 0 16 16">
+                        <path d="M6.5 15V.5a.5.5 0 0 1 1 0V15h1v-2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2h.5a.5.5 0 0 1 0 1H1.5a.5.5 0 0 1 0-1H2v-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4h1z"/>
+                        <path d="M2 14v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1zM2 12v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Company Code</h3>
+                    <p class="mb-0">303193625</p>
+                  </div>
+                </div>
+                
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-receipt" viewBox="0 0 16 16">
+                        <path d="M1.92.5a.5.5 0 0 0-.397.2.5.5 0 0 0-.097.3V15a.5.5 0 0 0 .776.42L3 14.333l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602a.5.5 0 0 0 .097-.3V1a.5.5 0 0 0-.776-.42L13 1.667 11.8.867l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2.017.7a.5.5 0 0 0-.097-.2.5.5 0 0 0-.397-.2zM2 2.333l.903.602a.5.5 0 0 0 .557 0L4.8 2.133l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602V14.8l-.903.602a.5.5 0 0 1-.557 0L12 14.067l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2 14.8V2.333z"/>
+                        <path d="M4 6.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">VAT Code</h3>
+                    <p class="mb-0">LT100008249813</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           
-          <div class="d-flex mb-4">
-            <div class="flex-shrink-0 me-3">
-              <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-telephone" viewBox="0 0 16 16">
-                  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="h6 mb-1">Phone</h3>
-              <p class="mb-0"><a href="tel:+37062111527" class="text-decoration-none" style="color: var(--nfc-dark-blue);">+370 621 11527</a></p>
-            </div>
-          </div>
-          
-          <div class="d-flex mb-4">
-            <div class="flex-shrink-0 me-3">
-              <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                  <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                  <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="h6 mb-1">Office</h3>
-              <p class="mb-0">Vilnius, Lithuania</p>
-            </div>
-          </div>
-          
-          <div class="d-flex mb-4">
-            <div class="flex-shrink-0 me-3">
-              <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-building" viewBox="0 0 16 16">
-                  <path d="M6.5 15V.5a.5.5 0 0 1 1 0V15h1v-2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2h.5a.5.5 0 0 1 0 1H1.5a.5.5 0 0 1 0-1H2v-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4h1z"/>
-                  <path d="M2 14v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1zM2 12v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1z"/>
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="h6 mb-1">Company Code</h3>
-              <p class="mb-0">303193625</p>
-            </div>
-          </div>
-          
-          <div class="d-flex">
-            <div class="flex-shrink-0 me-3">
-              <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-receipt" viewBox="0 0 16 16">
-                  <path d="M1.92.5a.5.5 0 0 0-.397.2.5.5 0 0 0-.097.3V15a.5.5 0 0 0 .776.42L3 14.333l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602a.5.5 0 0 0 .097-.3V1a.5.5 0 0 0-.776-.42L13 1.667 11.8.867l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2.017.7a.5.5 0 0 0-.097-.2.5.5 0 0 0-.397-.2zM2 2.333l.903.602a.5.5 0 0 0 .557 0L4.8 2.133l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602V14.8l-.903.602a.5.5 0 0 1-.557 0L12 14.067l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2 14.8V2.333z"/>
-                  <path d="M4 6.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="h6 mb-1">VAT Code</h3>
-              <p class="mb-0">LT100008249813</p>
-            </div>
-          </div>
-          
+
         </div>
+          <div class="col mt-4">
+            
+              <div class="card-body p-0">
+                <img src="/static/img/about.png" alt="About NFC Labs" class="img-fluid w-100" style="object-fit: contain; border-radius: 8px;">
+              </div>
+          </div>
       </div>
     </div>
   </div>

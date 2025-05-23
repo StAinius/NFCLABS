@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#jtq0thhz2k8z^(jwth*f4aafddr^tq5zgyzbf1j2r)zr(galw
 
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else ['89.40.6.100', 'web.qa.nfc.lt']
+ALLOWED_HOSTS = ['nfclabs.com', 'www.nfclabs.com', '89.40.6.100']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:

@@ -1,7 +1,7 @@
 from django import forms
 from .models import Product, ProductFile
 from django.forms import modelformset_factory
-from tinymce.widgets import TinyMCE  # Importuojame TinyMCE widgetą
+from tinymce.widgets import TinyMCE  
 
 
 class ContactForm(forms.Form):

@@ -9,7 +9,7 @@ services:
       - ./media:/app/media
     environment:
       - DEBUG=False
-      - ALLOWED_HOSTS=89.40.6.100
+      - ALLOWED_HOSTS=web.qa.nfc.lt,89.40.6.100
     command: gunicorn NFCLabs.wsgi:application --bind 0.0.0.0:8000
   
   nginx:
@@ -20,4 +20,3 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - web
-

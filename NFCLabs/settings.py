@@ -12,6 +12,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
 
 SECRET_KEY = "django-insecure-#jtq0thhz2k8z^(jwth*f4aafddr^tq5zgyzbf1j2r)zr(galw"
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+USE_X_FORWARDED_HOST = True
+
 DEBUG = True
 
 ALLOWED_HOSTS = ['nfclabs.com', 'www.nfclabs.com', '89.40.6.100']

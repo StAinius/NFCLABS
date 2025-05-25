@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from tinymce.widgets import TinyMCE
 from django import forms
 
@@ -27,7 +28,14 @@ class PageContent(models.Model):
     class Meta:
         verbose_name = "Website Content"
         verbose_name_plural = "Websites Content"
-        
+
+# Admin class with TinyMCE widget
+@admin.register(PageContent)
+class PageContentAdmin(admin.ModelAdmin):
+    list_display = ['get_display_name', 'title', 'updated_at']
+    list_filter = ['page_key', 'updated_at']
+    search_fields = ['title', 'content']
+    
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'content':
             return forms.CharField(widget=TinyMCE(

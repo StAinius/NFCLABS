@@ -3,7 +3,8 @@ from django.db import models
 from .models import Category, Product, ProductFile, Solution, ProductImage
 from tinymce.widgets import TinyMCE
 from django.conf import settings
-
+from django import forms
+from .models import ContactPage
 
 class WebsiteContentAdminSite(admin.AdminSite):
     site_header = "NFCLabs turinys"
@@ -68,3 +69,39 @@ class ProductAdmin(admin.ModelAdmin):
         files = request.FILES.getlist("multiple_documents")
         for f in files:
             pass
+
+
+from django.apps import apps
+def get_contact_page_model():
+    return apps.get_model('NFCLabs', 'ContactPage')
+
+class ContactPageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug', 'show_contact_form', 'order', 'is_active']
+    list_filter = ['is_active', 'show_contact_form']
+    search_fields = ['name', 'content']
+    prepopulated_fields = {'slug': ('name',)}
+    list_editable = ['order', 'is_active', 'show_contact_form']
+    
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()},
+    }
+    
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'image')
+        }),
+        ('Content', {
+            'fields': ('content',),
+            'classes': ('wide',)
+        }),
+        ('Settings', {
+            'fields': ('show_contact_form', 'order', 'is_active')
+        })
+    )
+
+try:
+    ContactPage = get_contact_page_model()
+    admin.site.register(ContactPage, ContactPageAdmin)
+except Exception as e: 
+    print(f"Error registering ContactPage: {e}")  
+    pass

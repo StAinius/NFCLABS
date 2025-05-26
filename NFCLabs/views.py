@@ -11,7 +11,9 @@ from django import forms
 import json
 import logging
 
-from .models import Category, Product, ProductFile, Solution
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from .models import Category, Product, ProductFile, Solution, ContactPage
 from website_content.models import PageContent
 from .forms import ContactForm
 
@@ -202,3 +204,46 @@ def terms_of_service(request):
 def cookie_policy(request):
     page_content = get_page_content("cookie_policy")
     return render(request, "footer/cookie-policy.html", {"page_content": page_content})
+
+
+
+def contact_detail(request, slug):
+    contact_page = get_object_or_404(ContactPage, slug=slug, is_active=True)
+    form = ContactForm()
+    
+    related_pages = ContactPage.objects.filter(is_active=True).exclude(id=contact_page.id)
+    
+    if request.method == 'POST' and contact_page.show_contact_form:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = f"New Contact Form Submission: {form.cleaned_data['subject']}"
+            message = f"""
+            Name: {form.cleaned_data['name']}
+            Email: {form.cleaned_data['email']}
+            Company: {form.cleaned_data.get('company', 'N/A')}
+            Phone: {form.cleaned_data.get('phone', 'N/A')}
+            
+            Message:
+            {form.cleaned_data['message']}
+            """
+            
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.CONTACT_EMAIL], 
+                    fail_silently=False,
+                )
+                messages.success(request, 'Your message has been sent successfully!')
+                return redirect('contact_detail', slug=slug)
+            except Exception as e:
+                messages.error(request, 'There was an error sending your message. Please try again.')
+    
+    context = {
+        'contact_page': contact_page,
+        'form': form if contact_page.show_contact_form else None,
+        'pages': related_pages,
+    }
+    
+    return render(request, 'pages/contact_detail.html', context)

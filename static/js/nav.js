@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function preventDefaultLink(e) {
-    // Tik mobiliame režime blokuojame nuorodos veikimą
     if (isMobile()) {
       e.preventDefault();
       
@@ -57,12 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!dropdown.classList.contains('animating')) {
         dropdown.classList.add('animating');
         
-        // Toggle active state
         if (item.classList.contains('active')) {
           item.classList.remove('active');
           dropdown.classList.remove('show');
         } else {
-          // Close other dropdowns first
           dropdownItems.forEach(otherItem => {
             if (otherItem !== item) {
               otherItem.classList.remove('active');
@@ -73,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           });
           
-          // Open this dropdown
           item.classList.add('active');
           dropdown.classList.add('show');
           
@@ -85,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => dropdown.classList.remove('animating'), 500);
       }
     }
-    // Desktop režime nekeičiame numatytojo nuorodos veikimo
   }
   
   dropdownItems.forEach(function(item) {
@@ -94,17 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!link || !dropdown) return;
     
-    // Pridedame click eventą tik mobiliam režimui
     link.addEventListener('click', preventDefaultLink);
     
-    // Remove any existing dropdown-toggle buttons for clean implementation
     const toggleButton = item.querySelector('.dropdown-toggle');
     if (toggleButton) {
       toggleButton.remove();
     }
     
     if (!isMobile()) {
-      // Keep hover functionality for desktop
       item.addEventListener('mouseenter', function() {
         dropdown.style.display = 'block';
         dropdown.classList.add('show');

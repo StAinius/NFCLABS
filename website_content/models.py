@@ -25,3 +25,4 @@ class PageContent(models.Model):
     class Meta:
         verbose_name = "Website Content"
         verbose_name_plural = "Websites Content"
+        

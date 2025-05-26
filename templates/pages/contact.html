@@ -10,14 +10,117 @@
 <div class="container mt-5 slideIn from-left" style="max-width: 1200px;">
   <div class="content-container">
     {% if page_content %}
-      <h1 class="page-title">{{ page_content.title }}</h1>
-      <p class="intro-text">
-        <div class="rich-content">{{ page_content.content|safe }}</div>
-      </p>
+    <h1 class="page-title">{{ page_content.title }}</h1>
+    <p class="intro-text">
+      <div class="rich-content">{{ page_content.content|safe }}</div>
+    </p>
     {% endif %}
   </div>
-  
-  <div class="row">
+
+  <div class="contact-buttons mt-1 text-center mb-4">
+    {% for contact_page in contact_pages %}
+    <a href="{% url 'contact_detail' contact_page.slug %}" class="button-slide bigger d-inline-block mx-2 my-2">
+      <span class="button-slide-decor"></span>
+      <span class="button-slide-content">
+        <span class="button-slide__icon">
+          <i class="fas fa-address-card"></i>
+        </span>
+        <span class="button-slide__text">{{ contact_page.name }}</span>
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="row flex-column-reverse flex-lg-row">
+    <div class="col-lg-6">
+      <div class="container">
+        <div class="unified-container">
+          <div class="col mb-1">
+            <div class="card border-0">
+              <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
+                <h3 class="h4 mb-0">Contact Information</h3>
+              </div>
+              <div class="card-body p-4">
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Email</h3>
+                    <p class="mb-0"><a href="mailto:info@nfclabs.com" class="text-decoration-none" style="color: var(--nfc-dark-blue);">info@nfclabs.com</a></p>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608a17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Phone</h3>
+                    <p class="mb-0"><a href="tel:+37062111527" class="text-decoration-none" style="color: var(--nfc-dark-blue);">+370 621 11527</a></p>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94z" />
+                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Office</h3>
+                    <p class="mb-0">Vilnius, Lithuania</p>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-building" viewBox="0 0 16 16">
+                        <path d="M6.5 15V.5a.5.5 0 0 1 1 0V15h1v-2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2h.5a.5.5 0 0 1 0 1H1.5a.5.5 0 0 1 0-1H2v-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4h1z" />
+                        <path d="M2 14v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1zM2 12v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">Company Code</h3>
+                    <p class="mb-0">303193625</p>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-receipt" viewBox="0 0 16 16">
+                        <path d="M1.92.5a.5.5 0 0 0-.397.2.5.5 0 0 0-.097.3V15a.5.5 0 0 0 .776.42L3 14.333l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602a.5.5 0 0 0 .097-.3V1a.5.5 0 0 0-.776-.42L13 1.667 11.8.867l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2.017.7a.5.5 0 0 0-.097-.2.5.5 0 0 0-.397-.2z" />
+                        <path d="M4 6.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="h6 mb-1">VAT Code</h3>
+                    <p class="mb-0">LT100008249813</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mt-4">
+            <div class="card-body p-0">
+              <img src="/static/img/about.png" alt="About NFC Labs" class="img-fluid w-100" style="object-fit: contain; border-radius: 0 0 8px 8px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-lg-6 mb-4 mb-lg-0">
       <div class="container">
         <div class="unified-container">
@@ -40,7 +143,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                      <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
+                      <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="col-md-6">
                       <label for="phone" class="form-label">Phone</label>
@@ -79,102 +182,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <div class="col-lg-6">
-      <div class="container">
-        <div class="unified-container">
-          <div class="col mb-1">
-            <div class="card border-0">
-              <div class="card-header text-center py-3" style="background-color: var(--nfc-teal); color: white;">
-                <h3 class="h4 mb-0">Contact Information</h3>
-              </div>
-              <div class="card-body p-4">
-                <div class="d-flex mb-4">
-                  <div class="flex-shrink-0 me-3">
-                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-envelope" viewBox="0 0 16 16">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="h6 mb-1">Email</h3>
-                    <p class="mb-0"><a href="mailto:info@nfclabs.com" class="text-decoration-none" style="color: var(--nfc-dark-blue);">info@nfclabs.com</a></p>
-                  </div>
-                </div>
-                
-                <div class="d-flex mb-4">
-                  <div class="flex-shrink-0 me-3">
-                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-telephone" viewBox="0 0 16 16">
-                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608a17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42a18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="h6 mb-1">Phone</h3>
-                    <p class="mb-0"><a href="tel:+37062111527" class="text-decoration-none" style="color: var(--nfc-dark-blue);">+370 621 11527</a></p>
-                  </div>
-                </div>
-                
-                <div class="d-flex mb-4">
-                  <div class="flex-shrink-0 me-3">
-                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="h6 mb-1">Office</h3>
-                    <p class="mb-0">Vilnius, Lithuania</p>
-                  </div>
-                </div>
-                
-                <div class="d-flex mb-4">
-                  <div class="flex-shrink-0 me-3">
-                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-building" viewBox="0 0 16 16">
-                        <path d="M6.5 15V.5a.5.5 0 0 1 1 0V15h1v-2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2h.5a.5.5 0 0 1 0 1H1.5a.5.5 0 0 1 0-1H2v-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4h1z"/>
-                        <path d="M2 14v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1zM2 12v1h1v-1H2zm3 0v1h1v-1H5zm6 0v1h1v-1h-1zm2 0v1h1v-1h-1z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="h6 mb-1">Company Code</h3>
-                    <p class="mb-0">303193625</p>
-                  </div>
-                </div>
-                
-                <div class="d-flex mb-4">
-                  <div class="flex-shrink-0 me-3">
-                    <div class="rounded-circle bg-light p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--nfc-teal)" class="bi bi-receipt" viewBox="0 0 16 16">
-                        <path d="M1.92.5a.5.5 0 0 0-.397.2.5.5 0 0 0-.097.3V15a.5.5 0 0 0 .776.42L3 14.333l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602a.5.5 0 0 0 .097-.3V1a.5.5 0 0 0-.776-.42L13 1.667 11.8.867l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2.017.7a.5.5 0 0 0-.097-.2.5.5 0 0 0-.397-.2zM2 2.333l.903.602a.5.5 0 0 0 .557 0L4.8 2.133l1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8 1.2-.8 1.2.8.903-.602V14.8l-.903.602a.5.5 0 0 1-.557 0L12 14.067l-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8-1.2-.8-1.2.8L2 14.8V2.333z"/>
-                        <path d="M4 6.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="h6 mb-1">VAT Code</h3>
-                    <p class="mb-0">LT100008249813</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-
-        </div>
-          <div class="col mt-4">
-            
-              <div class="card-body p-0">
-                <img src="/static/img/about.png" alt="About NFC Labs" class="img-fluid w-100" style="object-fit: contain; border-radius: 8px;">
-              </div>
-          </div>
       </div>
     </div>
   </div>

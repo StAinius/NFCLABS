@@ -3,7 +3,7 @@ from django.urls import reverse
 from tinymce.widgets import TinyMCE
 from django import forms
 from django.core.exceptions import ValidationError
-
+from django.utils.text import slugify
 
 class Solution(models.Model):
     name = models.CharField(max_length=100)
@@ -108,3 +108,33 @@ class ProductFile(models.Model):
 
     class Meta:
         app_label = "NFCLabs"
+
+
+
+class ContactPage(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    image = models.ImageField(upload_to='contact_pages/', blank=True, null=True)
+    content = models.TextField(help_text="Puslapio turinys")
+    show_contact_form = models.BooleanField(default=False, help_text="Ar rodyti kontaktinę formą šiame puslapyje?")
+    order = models.IntegerField(default=0, help_text="Rikiavimo tvarka dropdown meniu")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = "Contact Page"
+        verbose_name_plural = "Contact Pages"
+        app_label = 'NFCLabs'
+    
+    def __str__(self):
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+        
+    def get_absolute_url(self):
+        return reverse('contact_detail', args=[self.slug])

@@ -1,8 +1,7 @@
+from NFCLabs.models import Category, Solution, ContactPage
+
 def categories_processor(request):
-    """
-    Context processor to make categories available in all templates.
-    """
-    from .models import Category, Solution
+    from .models import Category
 
     categories = Category.objects.all()
 
@@ -17,17 +16,7 @@ def solutions_processor(request):
     return {"solutions": Solution.objects.all()}
 
 
-def categories_processor(request):
-    from .models import Category, Solution
-
-    categories = Category.objects.all()
-
+def contact_pages_processor(request):
     return {
-        "categories": categories,
+        'contact_pages': ContactPage.objects.filter(is_active=True),
     }
-
-
-def solutions_processor(request):
-    from .models import Solution
-
-    return {"solutions": Solution.objects.all()}

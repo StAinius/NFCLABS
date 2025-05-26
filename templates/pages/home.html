@@ -42,6 +42,7 @@ body {
   background-size: cover;
   background-position: center;
   clip-path: polygon(20% 0, 100% 0%, 100% 100%, 0 100%);
+  transition: all 0.3s ease;
 }
 
 .hero-title {
@@ -51,6 +52,7 @@ body {
   line-height: 1.2;
   position: relative;
   width: 1000px;
+  padding-right: 2rem;
 }
 
 .hero-title:after {
@@ -344,18 +346,56 @@ body {
   animation: rotate 20s infinite linear;
 }
 
+/* Kai nuotrauka neužima viso ploto - tekstas kairėje */
+@media screen and (max-width: 1400px) and (min-width: 1201px) {
+  .hero-title {
+    width: 60%;
+    font-size: 3rem;
+    padding-right: 2rem;
+  }
+  
+  .hero-bg {
+    width: 40%;
+  }
+}
+
+/* Kai nuotrauka užima visą plotą - tekstas per visą plotą */
 @media screen and (max-width: 1200px) {
+  .hero-bg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+    clip-path: none;
+    background-position: center;
+    left: 0;
+    right: 0;
+  }
+  
+  .hero-content {
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+  }
+  
   .hero-title {
     width: 100%;
+    max-width: 1000px;
     font-size: 3rem;
+    text-align: center;
+    padding-right: 0;
+    color: #2c3e50;
+    margin: 0 auto;
+  }
+  
+  .hero-title:after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
 @media screen and (max-width: 991px) {
-  .hero-bg {
-    width: 35%;
-  }
-  
   .about-section {
     gap: 2rem;
   }
@@ -379,21 +419,11 @@ body {
   }
   
   .hero-bg {
-    width: 100%;
-    height: 100%;
     opacity: 0.2;
-    clip-path: none;
-    background-position: right center;
   }
   
   .hero-title {
     font-size: 2.5rem;
-    text-align: center;
-  }
-  
-  .hero-title:after {
-    left: 50%;
-    transform: translateX(-50%);
   }
   
   .about-section {
@@ -438,6 +468,10 @@ body {
   
   .hero-title {
     font-size: 2rem;
+  }
+  
+  .hero-bg {
+    opacity: 0.15;
   }
   
   .stats-container {

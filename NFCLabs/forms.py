@@ -3,7 +3,6 @@ from .models import Product, ProductFile
 from django.forms import modelformset_factory
 from tinymce.widgets import TinyMCE  
 
-
 class ContactForm(forms.Form):
     name = forms.CharField(
         max_length=100,
@@ -60,3 +59,4 @@ class ProductFileForm(forms.ModelForm):
 ProductFileFormSet = modelformset_factory(
     ProductFile, form=ProductFileForm, extra=5, can_delete=True
 )
+

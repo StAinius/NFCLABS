@@ -19,7 +19,7 @@ USE_X_FORWARDED_HOST = True
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['nfclabs.com', 'www.nfclabs.com', '89.40.6.100', 'localhost']
+ALLOWED_HOSTS = ['nfclabs.com', 'www.nfclabs.com', '89.40.6.100', 'localhost', '127.0.0.1']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
@@ -63,6 +63,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "NFCLabs.context_processors.categories_processor",
                 "NFCLabs.context_processors.solutions_processor",
+                "NFCLabs.context_processors.contact_pages_processor",
             ],
         },
     },

@@ -26,3 +26,4 @@ class PageContentAdmin(admin.ModelAdmin):
         count = PageContent.objects.count()
         max_pages = len(PageContent.WEBSITES)
         return count < max_pages
+    

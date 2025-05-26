@@ -102,9 +102,24 @@
               <a class="nav-link nav-item-link px-3 {% if request.path == '/about/' %}active{% endif %}"
                 href="{% url 'about' %}">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link nav-item-link px-3 {% if request.path == '/contact/' %}active{% endif %}"
+            <li class="nav-item dropdown">
+              <a class="nav-link nav-item-link px-3 {% if '/contact/' in request.path %}active{% endif %}"
                 href="{% url 'contact' %}">Contact</a>
+              <div class="product-dropdown">
+                <div class="nav-divider"></div>
+                <div class="dropdown-container">
+                  {% for contact_page in contact_pages %}
+                  <a href="{% url 'contact_detail' contact_page.slug %}" class="dropdown-item">
+                    <div class="product-item">
+                      {% if contact_page.image %}
+                      <img src="{{ contact_page.image.url }}" class="product-thumbnail" alt="{{ contact_page.name }}">
+                      {% endif %}
+                      <span class="product-name">{{ contact_page.name }}</span>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+              </div>
             </li>
           </ul>
         </nav>

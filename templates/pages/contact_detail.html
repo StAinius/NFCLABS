@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ contact_page.name }} - NFCLabs{% endblock %}
+
+{% block content %}
+<div id="successMessage"
+    style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+    Message sent successfully!
+</div>
+
+<div class="container mt-5 slideIn from-left" style="max-width: 1200px;">
+    <div class="content-container">
+        <h1 class="page-title">{{ contact_page.name }}</h1>
+
+        {% if contact_page.image %}
+        <div class="mb-4">
+            <img src="{{ contact_page.image.url }}" alt="{{ contact_page.name }}" class="img-fluid">
+        </div>
+        {% endif %}
+
+        <p class="intro-text">
+            {{ contact_page.content|safe }}
+        </p>
+
+        {% if contact_page.show_contact_form and form %}
+        <div class="contact-form-section">
+            <div class="row">
+                <div class="width: 100%">
+                    <div class="container">
+                        <div class="unified-container">
+                            <div class="col mb-1">
+                                <div class="card border-0">
+                                    <div class="card-header text-center py-3"
+                                        style="background-color: var(--nfc-teal); color: white;">
+                                        <h3 class="h4 mb-0">Send Us a Message</h3>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <form id="contactForm" method="post">
+                                            {% csrf_token %}
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="name" class="form-label">Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="company" class="form-label">Company</label>
+                                                    <input type="text" class="form-control" id="company" name="company">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="email" class="form-label">Email <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        placeholder="your@email.com" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="phone" class="form-label">Phone</label>
+                                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <label for="subject" class="form-label">Subject <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="subject" name="subject"
+                                                        required>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <label for="message" class="form-label">Message <span
+                                                            class="text-danger">*</span></label>
+                                                    <textarea class="form-control" id="message" name="message" rows="4"
+                                                        required></textarea>
+                                                </div>
+                                                <div class="col-12 mb-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="privacy"
+                                                            name="privacy" required>
+                                                        <label class="form-check-label" for="privacy">
+                                                            I agree to the processing of my personal data in accordance
+                                                            with the privacy policy
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-4">
+                                                    <div class="captcha-container">
+                                                        <div id="recaptcha-container"
+                                                            class="d-flex justify-content-center"></div>
+                                                        <p class="captcha-text text-center text-muted small mt-2">Please
+                                                            complete the CAPTCHA to verify
+                                                            you're not a robot</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary w-100"
+                                                        style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
+                                                        <i class="fa fa-paper-plane me-2"></i>Send Message
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

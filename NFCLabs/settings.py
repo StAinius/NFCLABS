@@ -19,7 +19,7 @@ USE_X_FORWARDED_HOST = True
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['nfclabs.com', 'www.nfclabs.com', '89.40.6.100']
+ALLOWED_HOSTS = ['nfclabs.com', 'www.nfclabs.com', '89.40.6.100', 'localhost']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:

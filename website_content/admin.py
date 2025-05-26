@@ -23,6 +23,9 @@ class PageContentAdmin(admin.ModelAdmin):
         return False
     
     def has_add_permission(self, request):
-        count = PageContent.objects.count()
-        max_pages = len(PageContent.WEBSITES)
-        return count < max_pages
+        return False  # Neleidžiame rankinio pridėjimo
+    
+    def changelist_view(self, request, extra_context=None):
+        """Automatiškai sukuriame trūkstamus puslapius prieš rodant sąrašą"""
+        PageContent.ensure_all_pages_exist()
+        return super().changelist_view(request, extra_context)

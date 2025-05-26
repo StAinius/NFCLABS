@@ -59,12 +59,9 @@ Thumbs.db
 .env.*.local
 
 # Server-specific configurations
-nginx.conf
-docker-compose.production.yml
 deploy.sh
 
-# Local development
-docker-compose.yml
+
 
 # Certificates
 *.pem

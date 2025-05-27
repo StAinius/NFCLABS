@@ -164,8 +164,11 @@
           <h5 class="text-uppercase fw-bold small">Products</h5>
           <ul class="list-unstyled mb-0">
             {% for category in categories %}
-            <li class="mb-1"><a href="{% url 'products_category' category.slug %}" class="text-decoration-none small">{{
-                category.name }}</a></li>
+            <li class="mb-1">
+              <a href="{% url 'products_category' category.slug %}" class="text-decoration-none small">
+                {{ category.name }}
+              </a>
+            </li>
             {% endfor %}
           </ul>
         </div>

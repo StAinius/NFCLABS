@@ -33,44 +33,167 @@
                                 <div class="card border-0">
                                     <div class="card-header text-center py-3"
                                         style="background-color: var(--nfc-teal); color: white;">
-                                        <h3 class="h4 mb-0">Send Us a Message</h3>
+                                        <h3 class="h4 mb-0">
+                                            {% if contact_page.form_type == 'partner' %}
+                                            Partnership Application
+                                            {% elif contact_page.form_type == 'quote' %}
+                                            Request Quote
+                                            {% else %}
+                                            Send Us a Message
+                                            {% endif %}
+                                        </h3>
                                     </div>
                                     <div class="card-body p-4">
                                         <form id="contactForm" method="post">
                                             {% csrf_token %}
                                             <div class="row g-3">
+
+                                                {% if contact_page.form_type == 'partner' %}
+                                                <!-- Partner Form Fields -->
+                                                <div class="col-12 mb-4">
+                                                    <h5 class="text-primary mb-3">Company Information</h5>
+                                                </div>
+
                                                 <div class="col-md-6">
-                                                    <label for="name" class="form-label">Name <span
+                                                    <label for="{{ form.company_name.id_for_label }}"
+                                                        class="form-label">Company Name <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                        required>
+                                                    {{ form.company_name }}
                                                 </div>
+
                                                 <div class="col-md-6">
-                                                    <label for="company" class="form-label">Company</label>
-                                                    <input type="text" class="form-control" id="company" name="company">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="email" class="form-label">Email <span
+                                                    <label for="{{ form.country.id_for_label }}"
+                                                        class="form-label">Country <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="email" name="email"
-                                                        placeholder="your@email.com" required>
+                                                    {{ form.country }}
                                                 </div>
+
+                                                <div class="col-12 mb-3">
+                                                    <label for="{{ form.business_address.id_for_label }}"
+                                                        class="form-label">Business Address <span
+                                                            class="text-danger">*</span></label>
+                                                    {{ form.business_address }}
+                                                </div>
+
                                                 <div class="col-md-6">
-                                                    <label for="phone" class="form-label">Phone</label>
-                                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                                    <label for="{{ form.website.id_for_label }}"
+                                                        class="form-label">Website</label>
+                                                    {{ form.website }}
+                                                </div>
+
+                                                <div class="col-12 mb-4 mt-4">
+                                                    <h5 class="text-primary mb-3">Contact Person Information</h5>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.contact_name.id_for_label }}"
+                                                        class="form-label">Contact Person Name <span
+                                                            class="text-danger">*</span></label>
+                                                    {{ form.contact_name }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.position_title.id_for_label }}"
+                                                        class="form-label">Position / Title <span
+                                                            class="text-danger">*</span></label>
+                                                    {{ form.position_title }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email
+                                                        Address <span class="text-danger">*</span></label>
+                                                    {{ form.email }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.phone.id_for_label }}" class="form-label">Phone
+                                                        Number <span class="text-danger">*</span></label>
+                                                    {{ form.phone }}
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <label for="subject" class="form-label">Subject <span
+                                                    <label for="{{ form.message.id_for_label }}"
+                                                        class="form-label">Message <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="subject" name="subject"
-                                                        required>
+                                                    {{ form.message }}
                                                 </div>
+                                                {% elif contact_page.form_type == 'quote' %}
+                                                <!-- Quote Form Fields -->
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.name.id_for_label }}" class="form-label">Name
+                                                        <span class="text-danger">*</span></label>
+                                                    {{ form.name }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.company.id_for_label }}"
+                                                        class="form-label">Company <span
+                                                            class="text-danger">*</span></label>
+                                                    {{ form.company }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email
+                                                        <span class="text-danger">*</span></label>
+                                                    {{ form.email }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.phone.id_for_label }}" class="form-label">Phone
+                                                        <span class="text-danger">*</span></label>
+                                                    {{ form.phone }}
+                                                </div>
+
                                                 <div class="col-12 mb-3">
-                                                    <label for="message" class="form-label">Message <span
+                                                    <label for="{{ form.product_interest.id_for_label }}"
+                                                        class="form-label">Products/Services of Interest <span
                                                             class="text-danger">*</span></label>
-                                                    <textarea class="form-control" id="message" name="message" rows="4"
-                                                        required></textarea>
+                                                    {{ form.product_interest }}
+                                                    {% if form.product_interest.help_text %}
+                                                    <div class="form-text">{{ form.product_interest.help_text }}</div>
+                                                    {% endif %}
                                                 </div>
+
+
+                                                {% else %}
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.name.id_for_label }}" class="form-label">Name
+                                                        <span class="text-danger">*</span></label>
+                                                    {{ form.name }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.company.id_for_label }}"
+                                                        class="form-label">Company</label>
+                                                    {{ form.company }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email
+                                                        <span class="text-danger">*</span></label>
+                                                    {{ form.email }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="{{ form.phone.id_for_label }}"
+                                                        class="form-label">Phone</label>
+                                                    {{ form.phone }}
+                                                </div>
+
+                                                <div class="col-12 mb-3">
+                                                    <label for="{{ form.subject.id_for_label }}"
+                                                        class="form-label">Subject <span
+                                                            class="text-danger">*</span></label>
+                                                    {{ form.subject }}
+                                                </div>
+
+                                                <div class="col-12 mb-3">
+                                                    <label for="{{ form.message.id_for_label }}"
+                                                        class="form-label">Message <span
+                                                            class="text-danger">*</span></label>
+                                                    {{ form.message }}
+                                                </div>
+                                                {% endif %}
+
                                                 <div class="col-12 mb-4">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="privacy"
@@ -81,19 +204,30 @@
                                                         </label>
                                                     </div>
                                                 </div>
+
+                                                <!-- CAPTCHA -->
                                                 <div class="col-12 mb-4">
                                                     <div class="captcha-container">
                                                         <div id="recaptcha-container"
                                                             class="d-flex justify-content-center"></div>
-                                                        <p class="captcha-text text-center text-muted small mt-2">Please
-                                                            complete the CAPTCHA to verify
-                                                            you're not a robot</p>
+                                                        <p class="captcha-text text-center text-muted small mt-2">
+                                                            Please complete the CAPTCHA to verify you're not a robot
+                                                        </p>
                                                     </div>
                                                 </div>
+
+                                                <!-- Submit Button -->
                                                 <div class="col-12">
                                                     <button type="submit" class="btn btn-primary w-100"
                                                         style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
-                                                        <i class="fa fa-paper-plane me-2"></i>Send Message
+                                                        <i class="fa fa-paper-plane me-2"></i>
+                                                        {% if contact_page.form_type == 'partner' %}
+                                                        Submit Application
+                                                        {% elif contact_page.form_type == 'quote' %}
+                                                        Request Quote
+                                                        {% else %}
+                                                        Send Message
+                                                        {% endif %}
                                                     </button>
                                                 </div>
                                             </div>
@@ -105,8 +239,43 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
         </div>
+        {% endif %}
     </div>
 </div>
+
+<style>
+    .form-control,
+    .form-select {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--nfc-teal);
+        box-shadow: 0 0 0 0.2rem rgba(0, 150, 136, 0.25);
+    }
+
+    .form-check-input[type="checkbox"] {
+        margin-top: 0.25em;
+    }
+
+    .form-check-input[type="checkbox"]:checked {
+        background-color: var(--nfc-teal);
+        border-color: var(--nfc-teal);
+    }
+
+    .text-primary {
+        color: var(--nfc-teal) !important;
+    }
+
+    .col-12.mb-4 h5 {
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+    }
+</style>
 {% endblock %}

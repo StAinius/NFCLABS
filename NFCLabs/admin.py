@@ -6,6 +6,7 @@ from django.conf import settings
 from django import forms
 from .models import ContactPage
 
+
 class WebsiteContentAdminSite(admin.AdminSite):
     site_header = "NFCLabs turinys"
     site_title = "NFCLabs turinio administravimas"
@@ -72,36 +73,84 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 from django.apps import apps
+
+
 def get_contact_page_model():
-    return apps.get_model('NFCLabs', 'ContactPage')
+    return apps.get_model("NFCLabs", "ContactPage")
+
 
 class ContactPageAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'show_contact_form', 'order', 'is_active']
-    list_filter = ['is_active', 'show_contact_form']
-    search_fields = ['name', 'content']
-    prepopulated_fields = {'slug': ('name',)}
-    list_editable = ['order', 'is_active', 'show_contact_form']
-    
+    list_display = [
+        "name",
+        "slug",
+        "form_type",
+        "show_contact_form",
+        "order",
+        "is_active",
+    ]
+    list_filter = ["is_active", "show_contact_form", "form_type"]
+    search_fields = ["name", "content"]
+    prepopulated_fields = {"slug": ("name",)}
+    list_editable = ["order", "is_active", "show_contact_form", "form_type"]
+
     formfield_overrides = {
-        models.TextField: {'widget': TinyMCE()},
+        models.TextField: {"widget": TinyMCE()},
     }
-    
+
     fieldsets = (
-        (None, {
-            'fields': ('name', 'slug', 'image')
-        }),
-        ('Content', {
-            'fields': ('content',),
-            'classes': ('wide',)
-        }),
-        ('Settings', {
-            'fields': ('show_contact_form', 'order', 'is_active')
-        })
+        (None, {"fields": ("name", "slug", "image")}),
+        ("Content", {"fields": ("content",), "classes": ("wide",)}),
+        ("Form Settings", {"fields": ("form_type", "show_contact_form")}),
+        ("Settings", {"fields": ("order", "is_active")}),
     )
+
 
 try:
     ContactPage = get_contact_page_model()
     admin.site.register(ContactPage, ContactPageAdmin)
-except Exception as e: 
-    print(f"Error registering ContactPage: {e}")  
+except Exception as e:
+    print(f"Error registering ContactPage: {e}")
     pass
+
+from .models import EmailConfig
+class EmailConfigForm(forms.ModelForm):
+    email_host_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter password...'}),
+        label="Email Host Password",
+        help_text="SMTP server password"
+    )
+    
+    class Meta:
+        model = EmailConfig
+        fields = '__all__'
+
+@admin.register(EmailConfig)
+class EmailConfigAdmin(admin.ModelAdmin):
+    form = EmailConfigForm
+    list_display = ['name', 'email_host', 'email_host_user', 'updated_at']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    def has_add_permission(self, request):
+        return not EmailConfig.objects.exists()
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
+    fieldsets = (
+        ('Basic Settings', {
+            'fields': ('name',)
+        }),
+        ('SMTP Server Settings', {
+            'fields': ('email_host', 'email_port', 'email_use_ssl', 'email_use_tls')
+        }),
+        ('Authentication', {
+            'fields': ('email_host_user', 'email_host_password')
+        }),
+        ('Email Format', {
+            'fields': ('default_from_email',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )

@@ -111,13 +111,27 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "gandras.serveriai.lt"
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False
-EMAIL_HOST_USER = "ainius@nfc.lt"
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = "Užklausa <ainius@nfc.lt>"
+def get_email_config():
+    try:
+        from django.apps import apps
+        if apps.ready:
+            EmailConfig = apps.get_model('NFCLabs', 'EmailConfig')
+            return EmailConfig.objects.first()
+    except:
+        pass
+    return None
+
+email_config = get_email_config()
+
+if email_config:
+    EMAIL_HOST = email_config.email_host
+    EMAIL_PORT = email_config.email_port
+    EMAIL_USE_SSL = email_config.email_use_ssl
+    EMAIL_USE_TLS = email_config.email_use_tls
+    EMAIL_HOST_USER = email_config.email_host_user
+    EMAIL_HOST_PASSWORD = email_config.email_host_password
+    DEFAULT_FROM_EMAIL = email_config.default_from_email
+
 
 from django.contrib.messages import constants as messages
 

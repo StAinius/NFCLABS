@@ -14,57 +14,6 @@ body {
   max-width: 100%;
 }
 
-.hero-fullwidth {
-  position: relative;
-  width: 100vw;
-  min-height: 60vh;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  overflow: hidden;
-  margin-bottom: 0;
-  margin-top: -2rem;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 10;
-  padding: 4rem 0;
-}
-
-.hero-bg {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 45%;
-  height: 100%;
-  z-index: 1;
-  background-image: url('/static/img/nfc.png');
-  background-size: cover;
-  background-position: center;
-  clip-path: polygon(20% 0, 100% 0%, 100% 100%, 0 100%);
-  transition: all 0.3s ease;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-  position: relative;
-  width: 1000px;
-  padding-right: 2rem;
-}
-
-.hero-title:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -15px;
-  width: 80px;
-  height: 5px;
-  background-color: var(--nfc-teal);
-}
-
 .stats-container {
   position: relative;
   margin: 80px 0;
@@ -244,59 +193,6 @@ body {
   position: relative;
 }
 
-.cta-section {
-  background-color: var(--nfc-teal);
-  color: white;
-  padding: 2rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  margin-bottom: -4.5rem;
-}
-
-.cta-section:before {
-  content: '';
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  top: -150px;
-  left: -150px;
-}
-
-.cta-section:after {
-  content: '';
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  bottom: -100px;
-  right: -100px;
-}
-
-.cta-content {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.cta-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-}
-
-.cta-text {
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.9;
-}
 
 @keyframes pulse {
   0% {
@@ -436,15 +332,7 @@ body {
     height: 300px;
     order: -1;
   }
-  
-  .cta-title {
-    font-size: 2rem;
-  }
-  
-  .cta-text {
-    font-size: 1.1rem;
-  }
-  
+   
   .stats-row {
     justify-content: center;
   }
@@ -521,20 +409,7 @@ body {
   .about-image {
     height: 250px;
   }
-  
-  .cta-section {
-    padding: 1.5rem 0;
-  }
-  
-  .cta-title {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
-  
-  .cta-text {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
+
 }
 </style>
 

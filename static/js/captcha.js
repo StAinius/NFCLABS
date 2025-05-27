@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
   }
   
-  // Ieškome visų formų su ID, kurie gali egzistuoti
   var contactForms = document.querySelectorAll('#contactForm, #ContactForm');
   
   contactForms.forEach(function(form) {
@@ -137,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         var formData = new FormData(this);
         
-        // Pridedame AJAX antraštę, kad serveris žinotų, jog tai AJAX užklausa
         var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         
         fetch(this.action, {

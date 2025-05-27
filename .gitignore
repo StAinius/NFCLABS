@@ -97,3 +97,5 @@ coverage.xml
 # Secrets
 secrets/
 *.secret
+
+media/

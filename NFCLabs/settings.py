@@ -145,37 +145,53 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 TINYMCE_JS_URL = "https://cdn.jsdelivr.net/npm/tinymce@5/tinymce.min.js"
 TINYMCE_DEFAULT_CONFIG = {
-    "theme": "silver",
-    "plugins": "advlist autolink lists link searchreplace visualblocks code fullscreen insertdatetime media table wordcount textcolor",
-    "toolbar1": "bold italic underline strikethrough | forecolor backcolor | removeformat | code",
-    "toolbar2": "fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
-    "menubar": False,
-    "statusbar": False,
-    "font_formats": "Andale Mono=andale mono,times;"
-    + "Arial=arial,helvetica,sans-serif;"
-    + "Arial Black=arial black,avant garde;"
-    + "Book Antiqua=book antiqua,palatino;"
-    + "Comic Sans MS=comic sans ms,sans-serif;"
-    + "Courier New=courier new,courier;"
-    + "Georgia=georgia,palatino;"
-    + "Helvetica=helvetica;"
-    + "Impact=impact,chicago;"
-    + "Roboto=roboto,sans-serif;"
-    + "Symbol=symbol;"
-    + "Tahoma=tahoma,arial,helvetica,sans-serif;"
-    + "Terminal=terminal,monaco;"
-    + "Times New Roman=times new roman,times;"
-    + "Trebuchet MS=trebuchet ms,geneva;"
-    + "Verdana=verdana,geneva;"
-    + "Webdings=webdings;"
-    + "Wingdings=wingdings,zapf dingbats;",
-    "fontsize_formats": "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 28pt 36pt 48pt 72pt",
-    "height": 300,
-    "branding": False,
-    "resize": "both",
-    "elementpath": False,
+   "theme": "silver",
+   "plugins": "advlist autolink lists link searchreplace visualblocks code fullscreen insertdatetime media table wordcount textcolor",
+   "toolbar1": "bold italic underline strikethrough | forecolor backcolor | removeformat | code | togglebg",
+   "toolbar2": "fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
+   "menubar": False,
+   "statusbar": False,
+   "font_formats": "Andale Mono=andale mono,times;"
+   + "Arial=arial,helvetica,sans-serif;"
+   + "Arial Black=arial black,avant garde;"
+   + "Book Antiqua=book antiqua,palatino;"
+   + "Comic Sans MS=comic sans ms,sans-serif;"
+   + "Courier New=courier new,courier;"
+   + "Georgia=georgia,palatino;"
+   + "Helvetica=helvetica;"
+   + "Impact=impact,chicago;"
+   + "Roboto=roboto,sans-serif;"
+   + "Symbol=symbol;"
+   + "Tahoma=tahoma,arial,helvetica,sans-serif;"
+   + "Terminal=terminal,monaco;"
+   + "Times New Roman=times new roman,times;"
+   + "Trebuchet MS=trebuchet ms,geneva;"
+   + "Verdana=verdana,geneva;"
+   + "Webdings=webdings;"
+   + "Wingdings=wingdings,zapf dingbats;",
+   "fontsize_formats": "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 28pt 36pt 48pt 72pt",
+   "height": 300,
+   "branding": False,
+   "resize": "both",
+   "elementpath": False,
+   "setup": """function(ed) {
+       ed.ui.registry.addButton('togglebg', {
+           text: '🌓',
+           tooltip: 'Toggle background (Light/Dark)',
+           onAction: function() {
+               var body = ed.getBody();
+               if (body.style.backgroundColor === 'rgb(45, 45, 45)' || body.style.backgroundColor === '#2d2d2d') {
+                   body.style.backgroundColor = '#ffffff';
+                   body.style.color = '#000000';
+               } else {
+                   body.style.backgroundColor = '#2d2d2d';
+                   body.style.color = '#ffffff';
+               }
+           }
+       });
+   }""",
+   "content_style": "body { background-color: #ffffff; color: #000000; padding: 10px; }",
 }
-
 JAZZMIN_SETTINGS = {
     "site_title": "NFC Labs",
     "site_header": "NFC Labs",

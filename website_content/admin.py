@@ -10,10 +10,11 @@ class PageContentAdmin(admin.ModelAdmin):
     search_fields = ('content',)
     readonly_fields = ('page_key',)
     
-    formfield_overrides = {
-        models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30},
-                                          mce_attrs=settings.TINYMCE_DEFAULT_CONFIG)},
-    }
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name == 'content':
+            kwargs['widget'] = TinyMCE(attrs={'cols': 80, 'rows': 30},
+                                     mce_attrs=settings.TINYMCE_DEFAULT_CONFIG)
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
     
     def get_display_name(self, obj):
         return obj.get_display_name()
@@ -26,4 +27,3 @@ class PageContentAdmin(admin.ModelAdmin):
         count = PageContent.objects.count()
         max_pages = len(PageContent.WEBSITES)
         return count < max_pages
-    

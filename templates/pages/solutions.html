@@ -7,7 +7,7 @@
 <div class="container mt-5 slideIn from-left">
     <div class="content-container">
       {% if page_content %}
-        <h1 class="page-title">{{ page_content.title }}</h1>
+        <h1 class="page-title">{{ page_content.title|safe }}</h1>
         <p class="intro-text">
           <div class="rich-content">{{ page_content.content|safe }}</div>
         </p>

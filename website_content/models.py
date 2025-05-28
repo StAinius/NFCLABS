@@ -10,7 +10,7 @@ class PageContent(models.Model):
     }
     
     page_key = models.CharField(max_length=50, unique=True, verbose_name="Website")
-    title = models.CharField(max_length=200, verbose_name="Name")
+    title = models.TextField(max_length=200, verbose_name="Name")
     content = models.TextField(verbose_name="Content")
     meta_description = models.CharField(max_length=160, blank=True, verbose_name="Meta description")
     meta_keywords = models.CharField(max_length=200, blank=True, verbose_name="Meta keywords")

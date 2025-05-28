@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = "RENDER" not in os.environ
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/www/nfclabs_media'
+MEDIA_ROOT = '/app/media/'
 
 SECRET_KEY = "django-insecure-#jtq0thhz2k8z^(jwth*f4aafddr^tq5zgyzbf1j2r)zr(galw"
 

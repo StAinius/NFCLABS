@@ -59,14 +59,36 @@
   overflow: hidden;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.158);
-  background-color: #ffffff;
-  color: var(--nfc-dark-blue);
+  background: linear-gradient(135deg, var(--nfc-teal) 0%, var(--nfc-teal-dark) 100%);
+  color: white;
   border: none;
   cursor: pointer;
   display: inline-flex;
   margin-bottom: 0.5rem;
   width: auto;
   max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.button-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.button-slide:hover::before {
+  left: 100%;
+}
+
+.button-slide:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .button-slide__icon {
@@ -75,21 +97,9 @@
   display: grid;
   place-items: center;
   z-index: 2;
-  background-color: var(--nfc-teal);
   position: relative;
   box-sizing: border-box;
   flex-shrink: 0;
-}
-
-.button-slide-decor {
-  position: absolute;
-  inset: 0;
-  background-color: var(--nfc-teal);
-  transform: translateX(-100%);
-  transition: transform .4s;
-  z-index: 0;
-  width: calc(100% - 40px);
-  left: 40px;
 }
 
 .button-slide-content {
@@ -99,7 +109,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 }
 
 .button-slide {
@@ -115,45 +125,42 @@
   padding-left: 0.75rem;
 }
 
-
-
 .button-slide__icon.file-pdf {
-  background-color: #FF5252;
+  background: rgba(255, 82, 82, 0.3) !important;
 }
 
 .button-slide__icon.file-excel {
-  background-color: #1D6F42;
+  background: rgba(29, 111, 66, 0.3) !important;
 }
 
 .button-slide__icon.file-word {
-  background-color: #2B579A;
+  background: rgba(43, 87, 154, 0.3) !important;
 }
 
 .button-slide__icon.file-ppt {
-  background-color: #D24726;
+  background: rgba(210, 71, 38, 0.3) !important;
 }
 
 .button-slide__icon.file-text {
-  background-color: #4285F4;
+  background: rgba(66, 133, 244, 0.3) !important;
 }
 
 .button-slide__icon.file-zip {
-  background-color: #FFA000;
+  background: rgba(255, 160, 0, 0.3) !important;
 }
 
 .button-slide__icon.file-image {
-  background-color: #9C27B0;
+  background: rgba(156, 39, 176, 0.3) !important;
 }
 
 .button-slide__icon.file-spreadsheet {
-  background-color: #0F9D58;
+  background: rgba(15, 157, 88, 0.3) !important;
 }
 
 .button-slide__icon.file-default {
-  background-color: #757575;
+  background: rgba(117, 117, 117, 0.3) !important;
 }
 
-/* Icon color */
 .button-slide__icon i {
   color: white;
   font-size: 1.2rem;
@@ -161,19 +168,11 @@
 
 .button-slide__text {
   display: inline-block;
-  transition: color .2s;
+  transition: all 0.3s ease;
   padding: 2px 1.5rem 2px;
   padding-left: .75rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   flex-grow: 1;
-}
-
-.button-slide:hover .button-slide__text {
-  color: #fff;
-}
-
-.button-slide:hover .button-slide-decor {
-  transform: translate(0);
 }

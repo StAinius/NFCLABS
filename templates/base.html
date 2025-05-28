@@ -20,6 +20,12 @@
   <link rel="stylesheet" href="{% static 'css/nav.css' %}">
   {% block extra_css %}{% endblock %}
   <style>
+    html,
+    body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
     .side-banner {
       position: absolute;
       pointer-events: none;

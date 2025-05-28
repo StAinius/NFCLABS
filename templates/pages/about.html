@@ -1,227 +1,543 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}About Us - NFC Labs{% endblock %}
 
 {% block content %}
-<div class="container mt-5 slideIn from-left">
-    <div class="content-container">
+<style>
+.side-banner {
+  display: none;
+}
+
+.technologies-container {
+  position: relative;
+  margin: 80px 0;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.technologies-container::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(22, 177, 164, 0.2);
+}
+
+.technologies-container::after {
+  content: "";
+  position: absolute;
+  bottom: -70px;
+  right: -70px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(22, 177, 164, 0.15);
+}
+
+.technologies-heading {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #2c3e50;
+  position: relative;
+}
+
+.technologies-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--nfc-teal);
+}
+
+.tech-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.tech-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  height: 320px;
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.6s ease;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.tech-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.tech-card:hover .tech-card-inner {
+  transform: rotateY(180deg);
+}
+
+.tech-card-front,
+.tech-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 20px;
+  border-radius: 8px;
+}
+
+.tech-card-front {
+  background: white;
+}
+
+.tech-card-back {
+  background: linear-gradient(135deg, var(--nfc-teal), var(--nfc-teal-dark));
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.tech-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: var(--nfc-teal);
+}
+
+.tech-card-back .tech-icon {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.tech-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.tech-card-back .tech-title {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.tech-description {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.tech-card-back .tech-description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+}
+
+.tech-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.tech-features li {
+  padding: 4px 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.85rem;
+  position: relative;
+  padding-left: 18px;
+}
+
+.tech-features li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+}
+
+.about-content-section {
+  padding: 80px 0;
+  border-radius: 8px;
+  background: white;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #5a6c7d;
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.about-text h3 {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.about-text p {
+  margin-bottom: 20px;
+}
+
+.about-image {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  min-height: 400px;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.values-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+  border-radius: 8px;
+  margin: 60px 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.value-item {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.value-item:hover {
+  transform: translateY(-5px);
+}
+
+.value-icon {
+  font-size: 2.5rem;
+  color: var(--nfc-teal);
+  margin-bottom: 20px;
+}
+
+.value-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.value-text {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-image {
+    height: 300px;
+    order: -1;
+  }
+
+  .tech-row {
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .tech-card {
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .technologies-container {
+    margin: 40px 0;
+    padding: 40px 0;
+  }
+
+  .technologies-heading {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .about-text {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tech-card {
+    padding: 30px 20px;
+  }
+
+  .tech-icon {
+    font-size: 2.8rem;
+  }
+
+  .about-text {
+    padding: 25px 15px;
+  }
+}
+</style>
+
+<section class="cta-section slideIn from-left" style="margin-top: -24px; margin-bottom: 50px;">
+  <div class="container mt-5 slideIn from-left">
+    <div class="position-absolute top-0 end-0 opacity-10 d-none d-md-block"
+      style="font-size: 120px; line-height: 1; color: white; z-index: 1; right: 20px; top: 20px;">
+      <i class="fas fa-users"></i>
+    </div>
+
+    <div class="cta-content">
       {% if page_content %}
-        <h1 class="page-title">{{ page_content.title }}</h1>
+      <h1 class="page-title">{{ page_content.title }}</h1>
         <p class="intro-text">
           <div class="rich-content">{{ page_content.content|safe }}</div>
         </p>
       {% endif %}
-    </div>
-</div>
 
-<div class="container slideIn from-left">
-    <div class="unified-container">
-      <div class="col mb-1">
-        <div class="card-header text-center py-3">
-          <h2 class="mb-2 mt-2">Why Choose NFC Labs</h2>
-        </div>
-        
-        <div class="features-grid d-flex flex-row flex-wrap">
-          <div class="col-md-3 mb-4">
-            <div class="feature-item text-center p-4">
-             <div class="icon-container rounded-circle p-4 mx-auto mb-3 custom-shadow d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #ffffff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--nfc-teal)" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1-.478-.647l.818-1.329A5 5 0 0 0 13 6a5 5 0 0 0-10 0 5 5 0 0 0 2.16 4.024l.818 1.329A.5.5 0 0 1 5.5 13a.5.5 0 0 1-.459.31l-.762-1.77A1.964 1.964 0 0 0 3.826 10.31 5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
-                </svg>
-              </div>
-              <h3 class="feature-title h5 mb-3">Innovation</h3>
-              <p class="feature-description" style="font-weight: normal;">We stay at the forefront of NFC technology, constantly developing new applications and improving existing solutions.</p>
-            </div>
-          </div>
-          
-          <div class="col-md-3 mb-4">
-            <div class="feature-item text-center p-4">
-              <div class="icon-container rounded-circle p-4 mx-auto mb-3 custom-shadow d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #ffffff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--nfc-teal)" class="bi bi-people" viewBox="0 0 16 16">
-                  <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
-                </svg>
-              </div>
-              <h3 class="feature-title h5 mb-3">Expert Team</h3>
-              <p class="feature-description" style="font-weight: normal;">Our specialists combine technical knowledge with industry expertise to deliver solutions that address real business challenges.</p>
-            </div>
-          </div>
-          
-          <div class="col-md-3 mb-4">
-            <div class="feature-item text-center p-4">
-              <div class="icon-container rounded-circle p-4 mx-auto mb-3 custom-shadow d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #ffffff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--nfc-teal)" class="bi bi-gear" viewBox="0 0 16 16">
-                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.292-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.292c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                </svg>
-              </div>
-              <h3 class="feature-title h5 mb-3">Customization</h3>
-              <p class="feature-description" style="font-weight: normal;">We understand that every business is unique, which is why we create tailored NFC solutions that perfectly fit your specific needs.</p>
-            </div>
-          </div>
-          
-          <div class="col-md-3 mb-4">
-            <div class="feature-item text-center p-4">
-              <div class="icon-container rounded-circle p-4 mx-auto mb-3 custom-shadow d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #ffffff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--nfc-teal)" class="bi bi-headset" viewBox="0 0 16 16">
-                  <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/>
-                </svg>
-              </div>
-              <h3 class="feature-title h5 mb-3">Support</h3>
-              <p class="feature-description" style="font-weight: normal;">Our relationship doesn't end with implementation. We provide ongoing support and consultation to ensure your NFC solution continues to deliver value.</p>
-            </div>
-          </div>
-        </div>
+      <div
+        style="position: absolute; width: 150px; height: 150px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.05); top: 20px; left: 20px;">
+      </div>
+      <div
+        style="position: absolute; width: 100px; height: 100px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.05); bottom: 20px; right: 20px;">
       </div>
     </div>
-</div>
+  </div>
+</section>
 
-<section class="technologies-section py-5 slideIn from-left" style="background-color: var(--light-bg);">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="display-6 fw-bold text-dark mb-3">Technologies We Master</h2>
-      <p class="lead text-muted">Cutting-edge solutions built on proven technologies</p>
-    </div>
-
-    <div class="d-flex flex-wrap justify-content-center gap-4">
-      <div class="tech-flip-card" tabindex="0" style="width:180px; height:220px;">
-        <div class="tech-flip-inner" style="transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; position: relative; width: 100%; height: 100%;">
-          <div class="tech-flip-front d-flex flex-column align-items-center justify-content-center rounded-custom"
-               style="background: linear-gradient(135deg, #19a99d, #138976); color: white; font-weight: 700; font-size: 3rem; backface-visibility: hidden; position: absolute; width: 100%; height: 100%;">
-            NFC
+<section class="container slideIn from-left">
+  <div class="technologies-container">
+    <h2 class="technologies-heading">Technologies We Master</h2>
+    <div class="tech-row">
+      <div class="tech-card">
+        <div class="tech-card-inner">
+          <div class="tech-card-front">
+            <div class="tech-icon"><i class="fas fa-wifi"></i></div>
+            <div class="tech-title">NFC Technology</div>
+            <div class="tech-description">Near Field Communication solutions for seamless interactions and secure data exchange.</div>
           </div>
-          <div class="tech-flip-back d-flex flex-column align-items-center justify-content-center rounded-custom px-3"
-               style="background: linear-gradient(135deg, #138976, #19a99d); color: white; font-size: 0.95rem; font-weight: 500; backface-visibility: hidden; transform: rotateY(180deg); position: absolute; width: 100%; height: 100%; text-align:center;">
-            <h4 class="mb-2">Near Field Communication</h4>
-            <p>Contactless data exchange for seamless interactions</p>
+          <div class="tech-card-back">
+            <div class="tech-icon"><i class="fas fa-wifi"></i></div>
+            <div class="tech-title">NFC Technology</div>
+            <div class="tech-description">Advanced contactless solutions for modern businesses</div>
+            <ul class="tech-features">
+              <li>Contactless payments</li>
+              <li>Access control systems</li>
+              <li>Data sharing solutions</li>
+              <li>Mobile integrations</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div class="tech-flip-card" tabindex="0" style="width:180px; height:220px;">
-        <div class="tech-flip-inner" style="transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; position: relative; width: 100%; height: 100%;">
-          <div class="tech-flip-front d-flex flex-column align-items-center justify-content-center rounded-custom"
-               style="background: linear-gradient(135deg, #1cc4b0, #12846f); color: white; font-weight: 700; font-size: 2.8rem; backface-visibility: hidden; position: absolute; width: 100%; height: 100%;">
-            RFID
+      <div class="tech-card">
+        <div class="tech-card-inner">
+          <div class="tech-card-front">
+            <div class="tech-icon"><i class="fas fa-broadcast-tower"></i></div>
+            <div class="tech-title">RFID Systems</div>
+            <div class="tech-description">Radio Frequency Identification technology for tracking and identification applications.</div>
           </div>
-          <div class="tech-flip-back d-flex flex-column align-items-center justify-content-center rounded-custom px-3"
-               style="background: linear-gradient(135deg, #12846f, #1cc4b0); color: white; font-size: 0.95rem; font-weight: 500; backface-visibility: hidden; transform: rotateY(180deg); position: absolute; width: 100%; height: 100%; text-align:center;">
-            <h4 class="mb-2">Radio Frequency Identification</h4>
-            <p>Long-range identification and tracking solutions</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tech-flip-card" tabindex="0" style="width:180px; height:220px;">
-        <div class="tech-flip-inner" style="transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; position: relative; width: 100%; height: 100%;">
-          <div class="tech-flip-front d-flex flex-column align-items-center justify-content-center rounded-custom"
-               style="background: linear-gradient(135deg, #19a99d, #0f6658); color: white; font-weight: 700; font-size: 3rem; backface-visibility: hidden; position: absolute; width: 100%; height: 100%;">
-            BLE
-          </div>
-          <div class="tech-flip-back d-flex flex-column align-items-center justify-content-center rounded-custom px-3"
-               style="background: linear-gradient(135deg, #0f6658, #19a99d); color: white; font-size: 0.95rem; font-weight: 500; backface-visibility: hidden; transform: rotateY(180deg); position: absolute; width: 100%; height: 100%; text-align:center;">
-            <h4 class="mb-2">Bluetooth Low Energy</h4>
-            <p>Energy-efficient wireless connectivity</p>
+          <div class="tech-card-back">
+            <div class="tech-icon"><i class="fas fa-broadcast-tower"></i></div>
+            <div class="tech-title">RFID Systems</div>
+            <div class="tech-description">Comprehensive tracking and identification solutions</div>
+            <ul class="tech-features">
+              <li>Asset tracking</li>
+              <li>Inventory management</li>
+              <li>Supply chain optimization</li>
+              <li>Security applications</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div class="tech-flip-card" tabindex="0" style="width:180px; height:220px;">
-        <div class="tech-flip-inner" style="transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; position: relative; width: 100%; height: 100%;">
-          <div class="tech-flip-front d-flex flex-column align-items-center justify-content-center rounded-custom"
-               style="background: linear-gradient(135deg, #128f85, #1cc4b0); color: white; font-weight: 700; font-size: 3rem; backface-visibility: hidden; position: absolute; width: 100%; height: 100%;">
-            QR
+      <div class="tech-card">
+        <div class="tech-card-inner">
+          <div class="tech-card-front">
+            <div class="tech-icon"><i class="fab fa-bluetooth-b"></i></div>
+            <div class="tech-title">BLE Solutions</div>
+            <div class="tech-description">Bluetooth Low Energy technology for efficient wireless communication and IoT applications.</div>
           </div>
-          <div class="tech-flip-back d-flex flex-column align-items-center justify-content-center rounded-custom px-3"
-               style="background: linear-gradient(135deg, #1cc4b0, #128f85); color: white; font-size: 0.95rem; font-weight: 500; backface-visibility: hidden; transform: rotateY(180deg); position: absolute; width: 100%; height: 100%; text-align:center;">
-            <h4 class="mb-2">QR Codes</h4>
-            <p>Quick response codes for instant access</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tech-flip-card" tabindex="0" style="width:180px; height:220px;">
-        <div class="tech-flip-inner" style="transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; position: relative; width: 100%; height: 100%;">
-          <div class="tech-flip-front d-flex flex-column align-items-center justify-content-center rounded-custom"
-               style="background: linear-gradient(135deg, #19a99d, #0d5a4f); color: white; font-weight: 700; font-size: 3rem; backface-visibility: hidden; position: absolute; width: 100%; height: 100%;">
-            IoT
-          </div>
-          <div class="tech-flip-back d-flex flex-column align-items-center justify-content-center rounded-custom px-3"
-               style="background: linear-gradient(135deg, #0d5a4f, #19a99d); color: white; font-size: 0.95rem; font-weight: 500; backface-visibility: hidden; transform: rotateY(180deg); position: absolute; width: 100%; height: 100%; text-align:center;">
-            <h4 class="mb-2">Internet of Things</h4>
-            <p>Connected devices ecosystem integration</p>
+          <div class="tech-card-back">
+            <div class="tech-icon"><i class="fab fa-bluetooth-b"></i></div>
+            <div class="tech-title">BLE Solutions</div>
+            <div class="tech-description">Smart wireless connectivity for IoT ecosystems</div>
+            <ul class="tech-features">
+              <li>Beacon technology</li>
+              <li>IoT connectivity</li>
+              <li>Location services</li>
+              <li>Smart device integration</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <style>
-    .tech-flip-card:focus .tech-flip-inner,
-    .tech-flip-card:hover .tech-flip-inner {
-      transform: rotateY(180deg);
-    }
-    .rounded-custom {
-      border-radius: 8px;
-      clip-path: polygon(
-        0 0,
-        calc(100% - 16px) 0,
-        100% 16px,
-        100% 100%,
-        16px 100%,
-        0 calc(100% - 16px)
-      );
-    }
-  </style>
 </section>
 
+<section class="about-content-section slideIn from-left">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Our Mission</h3>
+        <p>At NFC Labs, we focus on efficient and innovative technologies that help businesses streamline their operations while reducing costs. Our goal is to make cutting-edge NFC, RFID, and BLE technologies accessible and practical for organizations of all sizes.</p>
+        <p>We believe in creating solutions that are not just technologically advanced, but also user-friendly and cost-effective. Every project we undertake is designed to deliver measurable value to our clients.</p>
+        <a href="/contact/" class="button-slide d-inline-block">
+          <span class="button-slide-decor"></span>
+          <span class="button-slide-content">
+            <span class="button-slide__icon">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="button-slide__text">Start Your Project</span>
+          </span>
+        </a>
+      </div>
+      <div class="about-image">
+        <img src="/static/img/about.png" alt="NFC Labs Team">
+      </div>
+    </div>
 
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="/static/img/technology.jpg" alt="Our Technology">
+      </div>
+      <div class="about-text">
+        <h3>Our Expertise</h3>
+        <p>With years of experience in developing NFC solutions, we have built a comprehensive understanding of how these technologies can transform business processes. From simple access control systems to complex payment solutions, we have the expertise to deliver.</p>
+        <p>Our team combines technical excellence with business acumen, ensuring that every solution we develop is not just technically sound, but also aligned with your business objectives and budget constraints.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="container slideIn from-left">
+  <div class="values-section">
+    <div class="text-center">
+      <h2 class="technologies-heading" style="margin-bottom: 20px;">Our Values</h2>
+      <p class="lead text-muted">The principles that guide everything we do</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+        <div class="value-title">Innovation</div>
+        <div class="value-text">We constantly explore new technologies and approaches to solve complex challenges in creative ways.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon"><i class="fas fa-handshake"></i></div>
+        <div class="value-title">Partnership</div>
+        <div class="value-text">We work closely with our clients as partners, understanding their needs and delivering tailored solutions.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon"><i class="fas fa-award"></i></div>
+        <div class="value-title">Excellence</div>
+        <div class="value-text">We maintain the highest standards in everything we do, from code quality to customer service.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon"><i class="fas fa-rocket"></i></div>
+        <div class="value-title">Growth</div>
+        <div class="value-text">We help our clients grow their businesses while continuously improving our own capabilities.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="cta-section slideIn from-left">
   <div class="cta-content">
     <h2 class="cta-title">Ready to Transform Your Business?</h2>
-    <p class="cta-text">Contact our team today to discover how NFC Labs can help you implement cutting-edge solutions that drive efficiency and innovation.</p>
+    <p class="cta-text">Let's discuss how our NFC solutions can help you achieve your goals.</p>
     <a href="/contact/" class="button-slide bigger" style="display: inline-block; width: 260px;">
       <span class="button-slide-decor"></span>
       <span class="button-slide-content">
         <span class="button-slide__icon">
           <i class="fas fa-comments"></i>
         </span>
-        <span class="button-slide__text">Get In Touch</span>
+        <span class="button-slide__text">Contact Us Today</span>
       </span>
     </a>
   </div>
 </section>
-<style>
-.stats-section .stat-number {
-  transition: transform 0.3s ease;
-}
 
-.stats-section .stat-item:hover .stat-number {
-  transform: scale(1.1);
-}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  });
 
-.process-step {
-  transition: transform 0.3s ease;
-}
+  const techCards = document.querySelectorAll('.tech-card');
+  techCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s ease';
+    card.style.transitionDelay = `${index * 0.2}s`;
+    observer.observe(card);
+  });
 
-.process-step:hover {
-  transform: translateY(-5px);
-}
+  const valueItems = document.querySelectorAll('.value-item');
+  valueItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
+    item.style.transition = 'all 0.6s ease';
+    item.style.transitionDelay = `${index * 0.1}s`;
+    observer.observe(item);
+  });
+});
+</script>
 
-@media (max-width: 768px) {
-  .row.g-4 .col-lg-6 {
-    margin-bottom: 2rem;
-  }
-  
-  .stats-grid .row .col-6 {
-    margin-bottom: 1rem;
-  }
-  
-  .tech-grid .row .col-4, 
-  .tech-grid .row .col-6 {
-    margin-bottom: 1rem;
-  }
-}
-</style>
 {% endblock %}

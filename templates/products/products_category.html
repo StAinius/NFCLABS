@@ -10,7 +10,7 @@
             <i class="fa fa-arrow-left"></i> Back to products
         </a>   
 
-        <h1 class="page-title">{{ category.name }}</h1>
+        <h1 class="page-title">{{ category.name|safe }}</h1>
         <p class="intro-text">
             <div class="rich-content"> {{ category.description | safe }}</div>
         </p>

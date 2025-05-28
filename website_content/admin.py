@@ -6,7 +6,7 @@ from django.conf import settings
 
 @admin.register(PageContent)
 class PageContentAdmin(admin.ModelAdmin):
-    list_display = ('get_display_name', 'title', 'updated_at')
+    list_display = ('get_display_name', 'get_clean_title', 'updated_at')
     search_fields = ('content',)
     readonly_fields = ('page_key',)
     

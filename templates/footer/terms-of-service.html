@@ -3,55 +3,252 @@
 {% block title %}NFC Labs - Terms of Service{% endblock %}
 
 {% block content %}
-<div class="container py-5 slideIn from-left from-left">
-  <div class="row justify-content-left">
-    <div class="col-md-8 bg-white p-4 rounded-4 shadow">
-      <h1 class="mb-4">Terms of Service</h1>
+<div class="container slideIn from-left">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
 
-      <p>Last updated: May 5, 2025</p>
+      <!-- Back Navigation -->
+      <a href="/" class="btn btn-sm mb-3" style="color: var(--nfc-teal); font-size: 1.5rem;">
+        <i class="fa fa-arrow-left"></i>Back to Home
+      </a>
 
-      <p>Welcome to <strong>NFC Labs</strong>, your use of our website and services is governed by these Terms of Service. Please read them carefully before using our site or services.</p>
+      <!-- Hero Section -->
+      <div class="policy-hero mb-5">
+        <h1 class="hero-title">Terms of Service</h1>
+        <p class="hero-subtitle">Your agreement to use our services</p>
+        <div class="hero-meta">
+          <span class="badge bg-primary">Last updated: May 5, 2025</span>
+        </div>
+      </div>
 
-      <h2>1. Acceptance of Terms</h2>
-      <p>By accessing or using the services provided by NFC Labs, you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.</p>
+      <!-- Introduction -->
+      <div class="description-container mb-4">
+        <p class="lead">Welcome to <span class="highlight">NFC Labs</span>. Your use of our website and services is
+          governed by these Terms of Service. Please read them carefully before using our site or services.</p>
+      </div>
 
-      <h2>2. Services Provided</h2>
-      <p>NFC Labs offers a range of products and services related to NFC technology, including but not limited to NFC door controllers, readers, desktop readers, and custom solutions. We reserve the right to modify, suspend, or discontinue any part of the services at any time.</p>
+      <!-- Acceptance of Terms -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-check-circle-fill"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">1. Acceptance of Terms</h3>
+              <p class="content-description">
+                By accessing or using the services provided by NFC Labs, you agree to comply with and be bound by these
+                Terms of Service. If you do not agree to these terms, please do not use our website.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>3. User Responsibilities</h2>
-      <p>By using our website, you agree to:</p>
-      <ul>
-        <li>Provide accurate information when creating an account or making a purchase.</li>
-        <li>Use our services for lawful purposes only.</li>
-        <li>Respect the intellectual property rights of NFC Labs and its partners.</li>
-        <li>Not engage in activities that may harm or disrupt our website or services.</li>
-      </ul>
+      <!-- Services Provided -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-tools"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">2. Services Provided</h3>
+              <p class="content-description">
+                NFC Labs offers a range of products and services related to NFC technology, including but not limited to
+                NFC door controllers, readers, desktop readers, and custom solutions. We reserve the right to modify,
+                suspend, or discontinue any part of the services at any time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>4. Intellectual Property</h2>
-      <p>The content, images, logos, trademarks, and other materials on our website are owned by NFC Labs or our licensors and are protected by intellectual property laws. You may not reproduce, distribute, or use any content from the site without permission.</p>
+      <!-- User Responsibilities -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-person-check-fill"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">3. User Responsibilities</h3>
+              <p class="content-description">By using our website, you agree to:</p>
+              <div class="usage-grid">
+                <div class="usage-item">✓ Provide accurate information when creating an account or making a purchase
+                </div>
+                <div class="usage-item">✓ Use our services for lawful purposes only</div>
+                <div class="usage-item">✓ Respect the intellectual property rights of NFC Labs and its partners</div>
+                <div class="usage-item">✓ Not engage in activities that may harm or disrupt our website or services
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>5. Limitation of Liability</h2>
-      <p>NFC Labs shall not be liable for any indirect, incidental, or consequential damages arising from the use or inability to use our website or services. We are not responsible for any loss of data, revenue, or profits resulting from using our website.</p>
+      <!-- Intellectual Property -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-shield-lock-fill"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">4. Intellectual Property</h3>
+              <p class="content-description">
+                The content, images, logos, trademarks, and other materials on our website are owned by NFC Labs or our
+                licensors and are protected by intellectual property laws. You may not reproduce, distribute, or use any
+                content from the site without permission.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>6. Privacy Policy</h2>
-      <p>Your use of our services is also governed by our <a href="{% url 'privacy-policy' %}">Privacy Policy</a>, which describes how we collect and use your information.</p>
+      <!-- Limitation of Liability -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">5. Limitation of Liability</h3>
+              <p class="content-description">
+                NFC Labs shall not be liable for any indirect, incidental, or consequential damages arising from the use
+                or inability to use our website or services. We are not responsible for any loss of data, revenue, or
+                profits resulting from using our website.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>7. Termination</h2>
-      <p>We reserve the right to suspend or terminate your access to our website or services at our discretion, with or without notice, if you violate any of these Terms of Service.</p>
+      <!-- Privacy Policy -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-file-earmark-lock-fill"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">6. Privacy Policy</h3>
+              <p class="content-description">
+                Your use of our services is also governed by our <a href="{% url 'privacy-policy' %}"
+                  style="color: var(--nfc-teal);">Privacy Policy</a>, which describes how we collect and use your
+                information.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>8. Governing Law</h2>
-      <p>These Terms of Service shall be governed by and construed in accordance with the laws of the Republic of Lithuania. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the Lithuanian courts.</p>
+      <!-- Termination -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-x-circle-fill"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">7. Termination</h3>
+              <p class="content-description">
+                We reserve the right to suspend or terminate your access to our website or services at our discretion,
+                with or without notice, if you violate any of these Terms of Service.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>9. Changes to Terms</h2>
-      <p>We reserve the right to update these Terms of Service at any time. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review these terms periodically for any changes.</p>
+      <!-- Governing Law -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-bank"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">8. Governing Law</h3>
+              <p class="content-description">
+                These Terms of Service shall be governed by and construed in accordance with the laws of the Republic of
+                Lithuania. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the
+                Lithuanian courts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h2>10. Contact Us</h2>
-      <p>If you have any questions regarding these Terms of Service, please contact us:</p>
-      <ul>
-        <li>Email: <a href="mailto:info@nfclabs.com">info@nfclabs.com</a></li>
-        <li>Phone: +370 621 11527</li>
-        <li>Office: Vilnius, Lithuania</li>
-      </ul>
+      <!-- Changes to Terms -->
+      <div class="category-card mb-4">
+        <div class="row g-0 h-100">
+          <div class="col-md-3">
+            <div class="content-icon-container">
+              <i class="bi bi-arrow-clockwise"></i>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card-content">
+              <h3 class="content-title">9. Changes to Terms</h3>
+              <p class="content-description">
+                We reserve the right to update these Terms of Service at any time. When we do, we will update the "Last
+                updated" date at the top of this page. We encourage you to review these terms periodically for any
+                changes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Contact CTA Section -->
+<div class="cta-section">
+  <div class="cta-content">
+    <h2 class="cta-title">Questions About Our Terms of Service?</h2>
+    <p class="cta-text">We're here to help clarify any questions about your agreement with us</p>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-4 text-center mb-3">
+        <div class="contact-cta-item">
+          <i class="bi bi-envelope-fill mb-2"></i>
+          <h6>Email Us</h6>
+          <a href="mailto:info@nfclabs.com" class="text-white">info@nfclabs.com</a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center mb-3">
+        <div class="contact-cta-item">
+          <i class="bi bi-telephone-fill mb-2"></i>
+          <h6>Call Us</h6>
+          <a href="tel:+37062111527" class="text-white">+370 621 11527</a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center mb-3">
+        <div class="contact-cta-item">
+          <i class="bi bi-geo-alt-fill mb-2"></i>
+          <h6>Visit Us</h6>
+          <span class="text-white">Vilnius, Lithuania</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

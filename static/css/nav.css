@@ -267,7 +267,6 @@
 
  .nav-menu.active {
    transform: translateY(0);
-   animation: slideDown 0.3s forwards;
    visibility: visible;
  }
 

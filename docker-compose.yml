@@ -1,3 +1,4 @@
+
 version: '3.8'
 services:
   web:
@@ -5,8 +6,17 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - .:/app 
+      - media_volume:/var/www/nfclabs_media 
     environment:
       - DEBUG=True
       - ALLOWED_HOSTS=localhost,127.0.0.1
     command: python manage.py runserver 0.0.0.0:8000
+
+volumes:
+  media_volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/var/www/nfclabs_media'

@@ -3,6 +3,7 @@ from django.db import models
 from .models import PageContent
 from tinymce.widgets import TinyMCE
 from django.conf import settings
+from django.utils.html import strip_tags
 
 @admin.register(PageContent)
 class PageContentAdmin(admin.ModelAdmin):
@@ -18,6 +19,10 @@ class PageContentAdmin(admin.ModelAdmin):
     def get_display_name(self, obj):
         return obj.get_display_name()
     get_display_name.short_description = 'Website'
+    
+    def get_clean_title(self, obj):
+        return strip_tags(obj.title)
+    get_clean_title.short_description = 'Name'
     
     def has_delete_permission(self, request, obj=None):
         return False

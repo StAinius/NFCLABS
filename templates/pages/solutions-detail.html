@@ -17,8 +17,7 @@
         <div class="row">
             <div class="col-lg-6 mb-4 mb-lg-0">
                 {% if solution.image %}
-                <img src="{{ solution.image.url }}" alt="{{ solution.name }}"
-                    class="solution-hero-image">
+                <img src="{{ solution.image.url }}" alt="{{ solution.name }}" class="solution-hero-image">
                 {% endif %}
             </div>
             <div class="col-lg-6">
@@ -126,52 +125,55 @@
     <div class="content-module card shadow border-0 p-4 slideIn from-left">
         <div class="ribbon"><span class="ribbon-text">You May Also Like</span></div>
 
-        <div class="row">
-            {% for category in categories %}
-            <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
-                <div class="showcase-item">
-                    {% if category.image %}
-                    <div class="media-container d-none d-sm-block">
-                        <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-                        <div class="hover-content">
-                            <h5 class="mobile-item-heading" title="{{ category.name }}">
-                                {{ category.name }}
-                            </h5>
-                            <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                                <span class="button-slide-decor"></span>
-                                <span class="button-slide-content smaller">
-                                    <span class="button-slide__icon">
-                                        <i class="fas fa-info-circle"></i>
+        <div class="content-inner">
+            <div class="row">
+                {% for category in categories %}
+                <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
+                    <div class="showcase-item">
+                        {% if category.image %}
+                        <div class="media-container d-none d-sm-block">
+                            <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+                            <div class="hover-content">
+                                <h5 class="mobile-item-heading" title="{{ category.name }}">
+                                    {{ category.name }}
+                                </h5>
+                                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
+                                    <span class="button-slide-decor"></span>
+                                    <span class="button-slide-content smaller">
+                                        <span class="button-slide__icon">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="button-slide__text" style="font-size: smaller;">View
+                                            Products</span>
                                     </span>
-                                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
-                                </span>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mobile-product-card d-block d-sm-none">
-                        <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-                        <div class="mobile-product-info">
-                            <h5 class="item-heading" title="{{ category.name }}">
-                                {{ category.name }}
-                            </h5>
-                            <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                                View Products
-                                <span class="button-slide-decor"></span>
-                                <span class="button-slide-content smaller">
-                                    <span class="button-slide__icon">
-                                        <i class="fas fa-info-circle"></i>
+                        <div class="mobile-product-card d-block d-sm-none">
+                            <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+                            <div class="mobile-product-info">
+                                <h5 class="item-heading" title="{{ category.name }}">
+                                    {{ category.name }}
+                                </h5>
+                                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
+                                    View Products
+                                    <span class="button-slide-decor"></span>
+                                    <span class="button-slide-content smaller">
+                                        <span class="button-slide__icon">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="button-slide__text" style="font-size: smaller;">View
+                                            Products</span>
                                     </span>
-                                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
-                                </span>
-                            </a>
+                                </a>
+                            </div>
                         </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

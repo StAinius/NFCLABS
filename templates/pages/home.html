@@ -103,52 +103,54 @@
   <div class="content-module card shadow border-0 p-4 slideIn from-left">
     <div class="ribbon"><span class="ribbon-text">Our Products</span></div>
 
-    <div class="row">
-      {% for category in categories %}
-      <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
-        <div class="showcase-item">
-          {% if category.image %}
-          <div class="media-container d-none d-sm-block">
-            <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-            <div class="hover-content">
-              <h5 class="item-heading" title="{{ category.name }}">
-                {{ category.name }}
-              </h5>
-              <p class="small">{{ category.short_description|default:"" }}</p>
-              <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                <span class="button-slide-decor"></span>
-                <span class="button-slide-content smaller">
-                  <span class="button-slide__icon">
-                    <i class="fas fa-info-circle"></i>
+    <div class="content-inner">
+      <div class="row">
+        {% for category in categories %}
+        <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
+          <div class="showcase-item">
+            {% if category.image %}
+            <div class="media-container d-none d-sm-block">
+              <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+              <div class="hover-content">
+                <h5 class="item-heading" title="{{ category.name }}">
+                  {{ category.name }}
+                </h5>
+                <p class="small">{{ category.short_description|default:"" }}</p>
+                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
+                  <span class="button-slide-decor"></span>
+                  <span class="button-slide-content smaller">
+                    <span class="button-slide__icon">
+                      <i class="fas fa-info-circle"></i>
+                    </span>
+                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
                   </span>
-                  <span class="button-slide__text" style="font-size: smaller;">View Products</span>
-                </span>
-              </a>
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div class="mobile-product-card d-block d-sm-none">
-            <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-            <div class="mobile-product-info">
-              <h5 class="mobile-item-heading" title="{{ category.name }}">
-                {{ category.name }}
-              </h5>
-              <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                View Products
-                <span class="button-slide-decor"></span>
-                <span class="button-slide-content smaller">
-                  <span class="button-slide__icon">
-                    <i class="fas fa-info-circle"></i>
+            <div class="mobile-product-card d-block d-sm-none">
+              <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+              <div class="mobile-product-info">
+                <h5 class="mobile-item-heading" title="{{ category.name }}">
+                  {{ category.name }}
+                </h5>
+                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
+                  View Products
+                  <span class="button-slide-decor"></span>
+                  <span class="button-slide-content smaller">
+                    <span class="button-slide__icon">
+                      <i class="fas fa-info-circle"></i>
+                    </span>
+                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
                   </span>
-                  <span class="button-slide__text" style="font-size: smaller;">View Products</span>
-                </span>
-              </a>
+                </a>
+              </div>
             </div>
+            {% endif %}
           </div>
-          {% endif %}
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </div>
 
@@ -161,10 +163,12 @@
       <div class="about-content">
         <div>
           <h2 class="mb-4">About NFC Labs</h2>
-          <p class="mb-3">NFC Labs is a team of young, energetic, but already experienced specialists in the development
+          <p class="mb-3">NFC Labs is a team of young, energetic, but already experienced specialists in the
+            development
             of NFC solutions. We focus on efficient and innovative technologies that save your money and time while
             opening up new opportunities.</p>
-          <p class="mb-3">Our goal is to help you easily implement innovative solutions in your activities, whether it's
+          <p class="mb-3">Our goal is to help you easily implement innovative solutions in your activities, whether
+            it's
             access control, payment systems, or custom NFC applications.</p>
           <p class="mb-4">With expertise in RFID, NFC, and BLE technologies, we create secure and user-friendly
             solutions for businesses of all sizes.</p>
@@ -187,7 +191,8 @@
   <section class="cta-section slideIn from-left">
     <div class="cta-content">
       <h2 class="cta-title">Ready to Transform Your Access Control?</h2>
-      <p class="cta-text">Contact our team today to discover how NFC Labs solutions can enhance security and efficiency
+      <p class="cta-text">Contact our team today to discover how NFC Labs solutions can enhance security and
+        efficiency
         in your organization.</p>
       <a href="/contact/" class="button-slide bigger" style="display: inline-block; width: 260px;">
         <span class="button-slide-decor"></span>

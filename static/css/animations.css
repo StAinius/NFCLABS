@@ -184,15 +184,15 @@
   color: #fff;
   position: absolute;
   top: 10px;
-  left: -43px;
+  left: -42px;
   right: -43px;
   border-bottom: var(--d) solid rgba(0, 0, 0, 0.2);
   line-height: 1.2;
   clip-path: polygon(0 0,100% 0,100% calc(100% - var(--d)),calc(100% - var(--d)) 100%,calc(100% - var(--d)) calc(100% - var(--d)),var(--d) calc(100% - var(--d)),var(--d) 100%,0 calc(100% - var(--d)));
   background: linear-gradient(135deg, var(--nfc-teal) 0%, var(--nfc-teal-dark) 100%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  z-index: 3;
+  z-index: 300;
   margin: 0 20px;
+  overflow: visible;
 }
 
 .ribbon-text {

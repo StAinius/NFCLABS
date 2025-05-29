@@ -37,6 +37,7 @@ footer.p-3 {
   height: auto;
   display: block;
   transition: transform 0.3s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .logo-image:hover {
@@ -437,7 +438,7 @@ footer.p-3 {
 }
 
 .cta-section {
-  background: linear-gradient(135deg, var(--nfc-teal) 0%, var(--nfc-teal-dark) 100%);
+background: linear-gradient(135deg, #1bb3a6 0%, #157068 100%);
   color: white;
   padding: 4rem 0;
   text-align: center;

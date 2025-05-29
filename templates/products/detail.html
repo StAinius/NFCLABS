@@ -21,15 +21,7 @@
         <div class="product-gallery mt-1">
           <div class="main-image-container">
             <button class="nav-arrow nav-prev" onclick="prevImage()">&#10094;</button>
-            {% if product.image %}
-            <img id="main-product-image" src="{{ product.image.url }}" alt="{{ product.name }}"
-              class="img-fluid rounded">
-            {% elif product.images.exists %}
-            {% with main_image=product.images.first %}
-            <img id="main-product-image" src="{{ main_image.image.url }}" alt="{{ product.name }}"
-              class="img-fluid rounded">
-            {% endwith %}
-            {% endif %}
+            <img id="main-product-image" alt="{{ product.name }}" class="img-fluid rounded">
             <button class="nav-arrow nav-next" onclick="nextImage()">&#10095;</button>
             <div class="mobile-image-counter">
               <span id="currentImageNum">1</span>/<span id="totalImages">1</span>
@@ -37,10 +29,10 @@
           </div>
 
           <div class="product-thumbnails">
-            {% if product.image %}
+            {% if product.main_image %}
             <div class="thumbnail-item">
-              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="thumbnail active"
-                onclick="changeMainImage('{{ product.image.url }}', this)">
+              <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="thumbnail"
+                onclick="changeMainImage('{{ product.main_image.image.url }}', this)">
             </div>
             {% endif %}
 
@@ -58,10 +50,9 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         let currentImageIndex = 0;
-
         const imageUrls = [];
-
         const thumbnailElements = document.querySelectorAll('.thumbnail');
+        
         thumbnailElements.forEach(function (thumbnail) {
           imageUrls.push(thumbnail.getAttribute('src'));
         });
@@ -69,22 +60,34 @@
         window.currentImageIndex = currentImageIndex;
         window.imageUrls = imageUrls;
 
-        function nextImage() {
-          currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
-          document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
+        const mainImage = document.getElementById('main-product-image');
+        
+        if (imageUrls.length > 0) {
+          mainImage.src = imageUrls[0];
+          const firstThumbnail = document.querySelector('.thumbnail');
+          if (firstThumbnail) {
+            firstThumbnail.classList.add('active');
+          }
+        }
 
-          updateActiveThumbnail();
-          updateMobileCounter();
-          window.currentImageIndex = currentImageIndex;
+        function nextImage() {
+          if (imageUrls.length > 0) {
+            currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+            document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
+            updateActiveThumbnail();
+            updateMobileCounter();
+            window.currentImageIndex = currentImageIndex;
+          }
         }
 
         function prevImage() {
-          currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
-          document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
-
-          updateActiveThumbnail();
-          updateMobileCounter();
-          window.currentImageIndex = currentImageIndex;
+          if (imageUrls.length > 0) {
+            currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+            document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
+            updateActiveThumbnail();
+            updateMobileCounter();
+            window.currentImageIndex = currentImageIndex;
+          }
         }
 
         function updateActiveThumbnail() {
@@ -98,7 +101,7 @@
         }
 
         function updateMobileCounter() {
-          if (window.innerWidth <= 768) {
+          if (window.innerWidth <= 768 && imageUrls.length > 0) {
             document.getElementById('currentImageNum').textContent = currentImageIndex + 1;
             document.getElementById('totalImages').textContent = imageUrls.length;
           }
@@ -120,19 +123,13 @@
           updateMobileCounter();
         };
 
-        const firstThumbnail = document.querySelector('.thumbnail');
-        if (firstThumbnail) {
-          firstThumbnail.classList.add('active');
-        }
-
         updateMobileCounter();
 
         function handleMobileView() {
           const isMobile = window.innerWidth <= 768;
-          const mainImage = document.getElementById('main-product-image');
           const mobileCounter = document.querySelector('.mobile-image-counter');
 
-          if (isMobile) {
+          if (isMobile && imageUrls.length > 0) {
             mobileCounter.style.display = 'block';
             updateMobileCounter();
 

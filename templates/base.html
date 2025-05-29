@@ -50,7 +50,7 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-  <header class="p-3 sticky-top">
+  <header class="p-3 sticky-top" style="background: linear-gradient(135deg, #13726a, #19a99d);">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
         <h1>
@@ -117,9 +117,18 @@
                   {% for contact_page in contact_pages %}
                   <a href="{% url 'contact_detail' contact_page.slug %}" class="dropdown-item">
                     <div class="product-item">
-                      {% if contact_page.image %}
-                      <img src="{{ contact_page.image.url }}" class="product-thumbnail" alt="{{ contact_page.name }}">
-                      {% endif %}
+                      <div
+                        style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #19a99d, #13726a); border-radius: 12px; margin-bottom: 8px;">
+                        {% if 'Partner' in contact_page.name %}
+                        <i class="fas fa-handshake" style="font-size: 48px; color: white;"></i>
+                        {% elif 'future' in contact_page.name or 'shape' in contact_page.name %}
+                        <i class="fas fa-rocket" style="font-size: 48px; color: white;"></i>
+                        {% elif 'Quote' in contact_page.name or 'Product' in contact_page.name %}
+                        <i class="fas fa-file-invoice-dollar" style="font-size: 48px; color: white;"></i>
+                        {% else %}
+                        <i class="fas fa-address-card" style="font-size: 48px; color: white;"></i>
+                        {% endif %}
+                      </div>
                       <span class="product-name">{{ contact_page.name }}</span>
                     </div>
                   </a>

@@ -12,7 +12,7 @@
 .nav-item-link {
  font-size: 1.1rem;
  font-weight: 500;
- color: var(--nfc-dark-blue);
+ color: rgba(255, 255, 255, 0.95);
  position: relative;
  transition: color 0.3s ease, transform 0.3s ease;
  padding: 0.5rem 1rem;
@@ -21,9 +21,11 @@
  display: block;
 }
 
+
 .nav-item-link:hover {
- transform: translateY(-2px);
- color: var(--nfc-teal);
+ transform: translateY(-1px);
+ color: #ffffff;
+ text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .nav-item-link::after {
@@ -33,8 +35,9 @@
  height: 2px;
  bottom: 0;
  left: 50%;
- background-color: var(--nfc-teal);
+ background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
  transition: width 0.3s ease, left 0.3s ease;
+ box-shadow: 0 1px 4px rgba(255, 255, 255, 0.3);
 }
 
 .nav-item-link:hover::after {
@@ -42,16 +45,19 @@
  left: 0;
 }
 
+
 .nav-item-link.active {
- color: var(--nfc-teal);
+ color: #ffffff;
  font-weight: 600;
+ text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .nav-item-link.active::after {
  width: 100%;
  left: 0;
- background-color: var(--nfc-teal);
+ background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.9));
 }
+
 
 .nav-item.dropdown {
  position: static;
@@ -93,9 +99,10 @@
  left: 50%;
  width: 0;
  height: 3px;
- background-color: var(--nfc-teal);
+ background: linear-gradient(90deg, #19a99d, #13726a);
  z-index: 1001;
  transform: translateX(-50%);
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-dropdown.show .nav-divider {

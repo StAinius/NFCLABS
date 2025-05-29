@@ -1,14 +1,15 @@
-
 {% extends "base.html" %}
 
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-<div id="successMessage" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+<div id="successMessage"
+  style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
   Message sent successfully!
 </div>
 <div class="container">
-  <a href="{% url 'products_category' product.category.slug %}" class="btn btn-sm mb-3" style="color: var(--nfc-teal); font-size: 1.5rem;">
+  <a href="{% url 'products_category' product.category.slug %}" class="btn btn-sm mb-3"
+    style="color: var(--nfc-teal); font-size: 1.5rem;">
     <i class="fa fa-arrow-left"></i> Back to {{ product.category.name }}
   </a>
 
@@ -16,74 +17,76 @@
     <div class="row mb-4">
       <div class="col-12 text-left">
         <h1 class="mb-4">{{ product.name }}</h1>
-              
+
         <div class="product-gallery mt-1">
           <div class="main-image-container">
             <button class="nav-arrow nav-prev" onclick="prevImage()">&#10094;</button>
-            {% if product.images.exists %}
-              {% with main_image=product.images.filter.first %}
-                <img id="main-product-image" src="{{ main_image.image.url }}" alt="{{ product.name }}" class="img-fluid rounded">
-              {% endwith %}
-            {% elif product.image %}
-              <img id="main-product-image" src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded">
+            {% if product.image %}
+            <img id="main-product-image" src="{{ product.image.url }}" alt="{{ product.name }}"
+              class="img-fluid rounded">
+            {% elif product.images.exists %}
+            {% with main_image=product.images.first %}
+            <img id="main-product-image" src="{{ main_image.image.url }}" alt="{{ product.name }}"
+              class="img-fluid rounded">
+            {% endwith %}
             {% endif %}
             <button class="nav-arrow nav-next" onclick="nextImage()">&#10095;</button>
             <div class="mobile-image-counter">
               <span id="currentImageNum">1</span>/<span id="totalImages">1</span>
             </div>
           </div>
-          
+
           <div class="product-thumbnails">
             {% if product.image %}
-              <div class="thumbnail-item">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="thumbnail active" 
-                    onclick="changeMainImage('{{ product.image.url }}', this)">
-              </div>
+            <div class="thumbnail-item">
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="thumbnail active"
+                onclick="changeMainImage('{{ product.image.url }}', this)">
+            </div>
             {% endif %}
-            
+
             {% for img in product.images.all %}
-              <div class="thumbnail-item">
-                <img src="{{ img.image.url }}" alt="{{ img.title|default:product.name }}" class="thumbnail"
-                    onclick="changeMainImage('{{ img.image.url }}', this)">
-              </div>
+            <div class="thumbnail-item">
+              <img src="{{ img.image.url }}" alt="{{ img.title|default:product.name }}" class="thumbnail"
+                onclick="changeMainImage('{{ img.image.url }}', this)">
+            </div>
             {% endfor %}
           </div>
         </div>
       </div>
     </div>
-    
+
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function () {
         let currentImageIndex = 0;
-        
+
         const imageUrls = [];
-        
+
         const thumbnailElements = document.querySelectorAll('.thumbnail');
-        thumbnailElements.forEach(function(thumbnail) {
+        thumbnailElements.forEach(function (thumbnail) {
           imageUrls.push(thumbnail.getAttribute('src'));
         });
-        
+
         window.currentImageIndex = currentImageIndex;
         window.imageUrls = imageUrls;
-        
+
         function nextImage() {
           currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
           document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
-          
+
           updateActiveThumbnail();
           updateMobileCounter();
           window.currentImageIndex = currentImageIndex;
         }
-        
+
         function prevImage() {
           currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
           document.getElementById('main-product-image').src = imageUrls[currentImageIndex];
-          
+
           updateActiveThumbnail();
           updateMobileCounter();
           window.currentImageIndex = currentImageIndex;
         }
-        
+
         function updateActiveThumbnail() {
           thumbnailElements.forEach((thumbnail, index) => {
             if (index === currentImageIndex) {
@@ -93,55 +96,55 @@
             }
           });
         }
-        
+
         function updateMobileCounter() {
           if (window.innerWidth <= 768) {
             document.getElementById('currentImageNum').textContent = currentImageIndex + 1;
             document.getElementById('totalImages').textContent = imageUrls.length;
           }
         }
-        
+
         window.nextImage = nextImage;
         window.prevImage = prevImage;
-        window.changeMainImage = function(url, clickedThumbnail) {
+        window.changeMainImage = function (url, clickedThumbnail) {
           document.getElementById('main-product-image').src = url;
-          
+
           thumbnailElements.forEach(thumbnail => {
             thumbnail.classList.remove('active');
           });
-          
+
           clickedThumbnail.classList.add('active');
-          
+
           currentImageIndex = Array.from(thumbnailElements).indexOf(clickedThumbnail);
           window.currentImageIndex = currentImageIndex;
           updateMobileCounter();
         };
-        
+
         const firstThumbnail = document.querySelector('.thumbnail');
         if (firstThumbnail) {
           firstThumbnail.classList.add('active');
         }
-        
+
         updateMobileCounter();
-        
+
         function handleMobileView() {
           const isMobile = window.innerWidth <= 768;
           const mainImage = document.getElementById('main-product-image');
           const mobileCounter = document.querySelector('.mobile-image-counter');
-          
+
           if (isMobile) {
             mobileCounter.style.display = 'block';
             updateMobileCounter();
-            
+
             if (!mainImage.hasAttribute('data-touch-initialized')) {
               let touchStartX = 0;
               let touchEndX = 0;
-              
-              mainImage.addEventListener('touchstart', function(e) {
+
+              mainImage.addEventListener('touchstart', function (e) {
                 touchStartX = e.changedTouches[0].screenX;
               }, false);
-              
-              mainImage.addEventListener('touchend', function(e) {
+
+              mainImage.addEventListener('touchend', function (e) {
                 touchEndX = e.changedTouches[0].screenX;
                 if (touchEndX < touchStartX - 50) {
                   nextImage();
@@ -150,68 +153,68 @@
                   prevImage();
                 }
               }, false);
-              
+
               mainImage.setAttribute('data-touch-initialized', 'true');
             }
           } else {
             mobileCounter.style.display = 'none';
           }
         }
-        
+
         handleMobileView();
         window.addEventListener('resize', handleMobileView);
       });
     </script>
   </div>
-    
+
   <div class="row justify-content-between slideIn from-left">
     <div class="col-lg-7">
       <div class="description-container mb-5">
         {{ product.description|safe }}
       </div>
-      
+
       {% if product.files.all %}
       <div class="border-top pt-4 mb-5">
         <h3 class="h5 mb-3">Documentation</h3>
         <ul class="list-unstyled">
           {% for file in product.files.all %}
-            <li class="mb-3">
-              {% with file_ext=file.file.name|slice:"-3:" %}
-                <a href="{{ file.file.url }}" class="button-slide" download>
-                  <span class="button-slide-decor"></span>
-                  <span class="button-slide-content">
-                    <span class="button-slide__icon">
-                      {% if file_ext == 'pdf' %}
-                        <i class="bi bi-file-earmark-pdf file-icon-pdf"></i>
-                      {% elif file_ext == 'xls' or file_ext == 'lsx' %}
-                        <i class="bi bi-file-earmark-excel file-icon-excel"></i>
-                      {% elif file_ext == 'doc' or file_ext == 'ocx' %}
-                        <i class="bi bi-file-earmark-word file-icon-word"></i>
-                      {% elif file_ext == 'ppt' or file_ext == 'ptx' %}
-                        <i class="bi bi-file-earmark-ppt file-icon-ppt"></i>
-                      {% elif file_ext == 'txt' %}
-                        <i class="bi bi-file-earmark-text file-icon-text"></i>
-                      {% elif file_ext == 'zip' or file_ext == 'rar' %}
-                        <i class="bi bi-file-earmark-zip file-icon-zip"></i>
-                      {% elif file_ext == 'png' or file_ext == 'jpg' or file_ext == 'jpeg' or file_ext == 'gif' %}
-                        <i class="bi bi-file-earmark-image file-icon-image"></i>
-                      {% elif file_ext == 'csv' %}
-                        <i class="bi bi-file-earmark-spreadsheet file-icon-spreadsheet"></i>
-                      {% else %}
-                        <i class="bi bi-file-earmark file-icon-default"></i>
-                      {% endif %}
-                    </span>
-                    <span class="button-slide__text">{{ file.title|default:"Download File" }}</span>
-                  </span>
-                </a>
-              {% endwith %}
-            </li>
+          <li class="mb-3">
+            {% with file_ext=file.file.name|slice:"-3:" %}
+            <a href="{{ file.file.url }}" class="button-slide" download>
+              <span class="button-slide-decor"></span>
+              <span class="button-slide-content">
+                <span class="button-slide__icon">
+                  {% if file_ext == 'pdf' %}
+                  <i class="bi bi-file-earmark-pdf file-icon-pdf"></i>
+                  {% elif file_ext == 'xls' or file_ext == 'lsx' %}
+                  <i class="bi bi-file-earmark-excel file-icon-excel"></i>
+                  {% elif file_ext == 'doc' or file_ext == 'ocx' %}
+                  <i class="bi bi-file-earmark-word file-icon-word"></i>
+                  {% elif file_ext == 'ppt' or file_ext == 'ptx' %}
+                  <i class="bi bi-file-earmark-ppt file-icon-ppt"></i>
+                  {% elif file_ext == 'txt' %}
+                  <i class="bi bi-file-earmark-text file-icon-text"></i>
+                  {% elif file_ext == 'zip' or file_ext == 'rar' %}
+                  <i class="bi bi-file-earmark-zip file-icon-zip"></i>
+                  {% elif file_ext == 'png' or file_ext == 'jpg' or file_ext == 'jpeg' or file_ext == 'gif' %}
+                  <i class="bi bi-file-earmark-image file-icon-image"></i>
+                  {% elif file_ext == 'csv' %}
+                  <i class="bi bi-file-earmark-spreadsheet file-icon-spreadsheet"></i>
+                  {% else %}
+                  <i class="bi bi-file-earmark file-icon-default"></i>
+                  {% endif %}
+                </span>
+                <span class="button-slide__text">{{ file.title|default:"Download File" }}</span>
+              </span>
+            </a>
+            {% endwith %}
+          </li>
           {% endfor %}
         </ul>
       </div>
       {% endif %}
     </div>
-    
+
     <div class="col-lg-5">
       <div class="card border-0 shadow-sm">
         <div class="card-header text-center py-3">
@@ -221,17 +224,18 @@
           <form id="contactForm" method="post" action="{% url 'product_detail' slug=product.slug %}">
             {% csrf_token %}
             <input type="hidden" name="product_interest" value="{{ product.name }}">
-            
+
             <div class="mb-3">
               <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
               <input type="email" class="form-control" id="email" name="email" required>
             </div>
-            
+
             <div class="mb-3">
               <label for="message" class="form-label">Your Message <span class="text-danger">*</span></label>
-              <textarea class="form-control" id="message" name="message" rows="5" placeholder="How can we help you with {{ product.name }}?" required></textarea>
+              <textarea class="form-control" id="message" name="message" rows="5"
+                placeholder="How can we help you with {{ product.name }}?" required></textarea>
             </div>
-            
+
             <div class="mb-4">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
@@ -240,13 +244,15 @@
                 </label>
               </div>
             </div>
-            
+
             <div class="captcha-container mb-4">
               <div id="recaptcha-container" class="d-flex justify-content-center"></div>
-              <p class="captcha-text text-center text-muted small mt-2">Please complete the CAPTCHA to verify you're not a robot</p>
+              <p class="captcha-text text-center text-muted small mt-2">Please complete the CAPTCHA to verify you're not
+                a robot</p>
             </div>
-            
-            <button type="submit" class="btn btn-primary w-100" style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
+
+            <button type="submit" class="btn btn-primary w-100"
+              style="background-color: var(--nfc-teal); border-color: var(--nfc-teal);">
               <i class="fa fa-paper-plane me-2"></i>Send Message
             </button>
           </form>

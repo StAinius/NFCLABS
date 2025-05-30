@@ -595,6 +595,8 @@ header.p-2 {
   background-color: none;
   max-width: 500px;
   max-height: 500px;
+  width: 100%;
+  height: auto;
   border-radius: 8px;
 }
 
@@ -1758,7 +1760,20 @@ footer .list-unstyled a {
     width: 40%;
   }
 }
+@media (max-width: 768px) {
+  .solution-hero-image {
+    max-width: 100%;
+    max-height: auto;
+    border-radius: 6px;
+  }
+}
 
+@media (max-width: 480px) {
+  .solution-hero-image {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+}
 @media screen and (max-width: 1200px) {
   .hero-bg {
     width: 100%;

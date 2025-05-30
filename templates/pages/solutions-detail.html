@@ -8,7 +8,8 @@
     style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
     Message sent successfully!
 </div>
-<div class="container slideIn from-left narrow-container ">
+
+<div class="container slideIn from-left narrow-container">
     <div class="content-container">
         <a href="{% url 'solutions' %}" class="btn btn-sm mb-3" style="color: var(--nfc-teal); font-size: 1.5rem;">
             <i class="fa fa-arrow-left"></i> Back to solutions
@@ -42,29 +43,30 @@
 <div class="container py-5 slideIn from-left narrow-container">
     <div class="row">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm sticky-top">
+            <div class="card border-0 shadow-sm">
                 <div class="card-header text-center py-3">
                     <h2 class="h4 mb-0">Features & Benefits</h2>
                 </div>
                 <div class="card-body p-4">
                     <div class="solution-details">{{ solution.details|safe }}</div>
                 </div>
+            </div>
 
-                <div class="card border-0 shadow-sm mt-4 mx-4">
-                    <div class="card-header text-center py-3">
-                        <h3 class="h4 mb-0">Solution Video</h3>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/AS7aG6Iz9lA" title="{{ solution.name }} Video"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
+            {% if solution.video_url %}
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-header text-center py-3">
+                    <h3 class="h4 mb-0">Solution Video</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="{{ solution.video_url }}" title="{{ solution.name }} Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
 
         <div class="col-lg-4">
@@ -114,7 +116,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -176,4 +177,5 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

@@ -12,6 +12,13 @@ class Solution(models.Model):
     details = models.TextField()
     image = models.ImageField(upload_to="solutions/", null=True, blank=True)
 
+    video_url = models.URLField(
+        max_length=500, 
+        blank=True, 
+        null=True,
+        help_text="Video"
+    )
+    
     def __str__(self):
         return self.name
 

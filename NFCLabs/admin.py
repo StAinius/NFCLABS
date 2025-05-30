@@ -23,7 +23,19 @@ class SolutionAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {"widget": TinyMCE()},
     }
-
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'image')
+        }),
+        ('Content', {
+            'fields': ('description', 'details'),
+            'classes': ('wide',)
+        }),
+        ('Video', {
+            'fields': ('video_url',),
+            'description': 'Video URL'
+        }),
+    )
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

@@ -20,6 +20,91 @@
   <link rel="stylesheet" href="{% static 'css/nav.css' %}">
   {% block extra_css %}{% endblock %}
   <style>
+    .contact-icon-container {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .contact-icon i {
+      font-size: 28px;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    /* Minimalist icon styles - all gray */
+    .partner-icon,
+    .innovation-icon,
+    .quote-icon,
+    .general-icon {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      box-shadow: 0 2px 8px rgba(71, 85, 105, 0.1);
+    }
+
+    .partner-icon i,
+    .innovation-icon i,
+    .quote-icon i,
+    .general-icon i {
+      color: #475569;
+    }
+
+    /* Hover effects - all gray */
+    .dropdown-item:hover .partner-icon,
+    .dropdown-item:hover .innovation-icon,
+    .dropdown-item:hover .quote-icon,
+    .dropdown-item:hover .general-icon {
+      background: #475569;
+      border-color: #475569;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(71, 85, 105, 0.2);
+    }
+
+    .dropdown-item:hover .partner-icon i,
+    .dropdown-item:hover .innovation-icon i,
+    .dropdown-item:hover .quote-icon i,
+    .dropdown-item:hover .general-icon i {
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .contact-icon-container {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+        margin-bottom: 0;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+      }
+
+      .contact-icon i {
+        font-size: 16px;
+      }
+    }
+
     html,
     body {
       overflow-x: hidden;
@@ -117,17 +202,25 @@
                   {% for contact_page in contact_pages %}
                   <a href="{% url 'contact_detail' contact_page.slug %}" class="dropdown-item">
                     <div class="product-item">
-                      <div
-                        style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #19a99d, #13726a); border-radius: 12px; margin-bottom: 8px;">
+                      <div class="contact-icon-container">
                         {% if 'Partner' in contact_page.name %}
-                        <i class="fas fa-handshake" style="font-size: 48px; color: white; height: 40px; width: 40px;"></i>
+                        <div class="contact-icon partner-icon">
+                          <i class="fas fa-users"></i>
+                        </div>
                         {% elif 'future' in contact_page.name or 'shape' in contact_page.name %}
-                        <i class="fas fa-rocket" style="font-size: 48px; color: white; height: 40px; width: 40px;"></i>
+                        <div class="contact-icon innovation-icon">
+                          <i class="fas fa-lightbulb"></i>
+                        </div>
                         {% elif 'Quote' in contact_page.name or 'Product' in contact_page.name %}
-                        <i class="fas fa-file-invoice-dollar" style="font-size: 48px; color: white; height: 40px; width: 40px;"></i>
+                        <div class="contact-icon quote-icon">
+                          <i class="fas fa-calculator"></i>
+                        </div>
                         {% else %}
-                        <i class="fas fa-address-card" style="font-size: 48px; color: white; height: 40px; width: 40px;">
+                        <div class="contact-icon general-icon">
+                          <i class="fas fa-envelope"></i>
+                        </div>
                         {% endif %}
+                        <div class="contact-icon-glow"></div>
                       </div>
                       <span class="product-name">{{ contact_page.name }}</span>
                     </div>

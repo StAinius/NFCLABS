@@ -593,6 +593,9 @@ header.p-2 {
 
 .solution-hero-image {
   background-color: none;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 8px;
 }
 
 .category-item {

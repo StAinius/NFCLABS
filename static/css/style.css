@@ -404,7 +404,7 @@ header.p-2 {
   height: 450px;
   display: flex;
   justify-content: center;
-  align-items: left;
+  align-items: center;
   border-radius: 8px;
 }
 

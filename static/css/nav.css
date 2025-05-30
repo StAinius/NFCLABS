@@ -291,7 +291,7 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     flex-direction: column;
     padding: 10px 0;
-    transform: translateY(-100%);
+    transform: translateY(0);
     transition: transform 0.3s ease;
     z-index: 5;
     overflow-y: auto;

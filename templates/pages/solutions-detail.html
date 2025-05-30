@@ -151,14 +151,14 @@
                             </div>
                         </div>
 
-                        <div class="mobile-product-card d-block d-sm-none">
+                        <div class="mobile-product-card d-block d-sm-none" data-category-slug="{{ category.slug }}">
                             <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-                            <div class="mobile-product-info">
+                            <div class="mobile-hover-content">
                                 <h5 class="item-heading" title="{{ category.name }}">
                                     {{ category.name }}
                                 </h5>
+                                <p class="small">{{ category.short_description|default:"" }}</p>
                                 <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                                    View Products
                                     <span class="button-slide-decor"></span>
                                     <span class="button-slide-content smaller">
                                         <span class="button-slide__icon">

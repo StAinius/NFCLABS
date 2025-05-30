@@ -99,6 +99,9 @@
   </div>
 </section>
 
+
+
+
 <div class="container mt-5 narrow-container">
   <div class="content-module card shadow border-0 p-4 slideIn from-left">
     <div class="ribbon"><span class="ribbon-text">Our Products</span></div>
@@ -154,81 +157,81 @@
     </div>
   </div>
 
-  <section class="container slideIn from-left">
-    <div class="about-section">
-      <div class="about-image">
-        <img src="/static/img/about.png" alt="About NFC Labs">
-      </div>
+<section class="container slideIn from-left">
+  <div class="about-section">
+    <div class="about-image">
+      <img src="/static/img/about.png" alt="About NFC Labs">
+    </div>
 
-      <div class="about-content">
-        <div>
-          <h2 class="mb-4">About NFC Labs</h2>
-          <p class="mb-3">NFC Labs is a team of young, energetic, but already experienced specialists in the
-            development
-            of NFC solutions. We focus on efficient and innovative technologies that save your money and time while
-            opening up new opportunities.</p>
-          <p class="mb-3">Our goal is to help you easily implement innovative solutions in your activities, whether
-            it's
-            access control, payment systems, or custom NFC applications.</p>
-          <p class="mb-4">With expertise in RFID, NFC, and BLE technologies, we create secure and user-friendly
-            solutions for businesses of all sizes.</p>
-        </div>
-        <div>
-          <a href="/about/" class="button-slide" style="display: inline-block; width: auto;">
-            <span class="button-slide-decor"></span>
-            <span class="button-slide-content">
-              <span class="button-slide__icon">
-                <i class="fas fa-info-circle"></i>
-              </span>
-              <span class="button-slide__text">Learn More About Us</span>
+    <div class="about-content">
+      <div>
+        <h2 class="mb-4">About NFC Labs</h2>
+        <p class="mb-3">NFC Labs is a team of young, energetic, but already experienced specialists in the
+          development
+          of NFC solutions. We focus on efficient and innovative technologies that save your money and time while
+          opening up new opportunities.</p>
+        <p class="mb-3">Our goal is to help you easily implement innovative solutions in your activities, whether
+          it's
+          access control, payment systems, or custom NFC applications.</p>
+        <p class="mb-4">With expertise in RFID, NFC, and BLE technologies, we create secure and user-friendly
+          solutions for businesses of all sizes.</p>
+      </div>
+      <div>
+        <a href="/about/" class="button-slide" style="display: inline-block; width: auto;">
+          <span class="button-slide-decor"></span>
+          <span class="button-slide-content">
+            <span class="button-slide__icon">
+              <i class="fas fa-info-circle"></i>
             </span>
-          </a>
-        </div>
+            <span class="button-slide__text">Learn More About Us</span>
+          </span>
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cta-section slideIn from-left">
-    <div class="cta-content">
-      <h2 class="cta-title">Ready to Transform Your Access Control?</h2>
-      <p class="cta-text">Contact our team today to discover how NFC Labs solutions can enhance security and
-        efficiency
-        in your organization.</p>
-      <a href="/contact/" class="button-slide bigger" style="display: inline-block; width: 260px;">
-        <span class="button-slide-decor"></span>
-        <span class="button-slide-content">
-          <span class="button-slide__icon">
-            <i class="fas fa-info-circle"></i>
-          </span>
-          <span class="button-slide__text">Contact Us</span>
+<section class="cta-section slideIn from-left">
+  <div class="cta-content">
+    <h2 class="cta-title">Ready to Transform Your Access Control?</h2>
+    <p class="cta-text">Contact our team today to discover how NFC Labs solutions can enhance security and
+      efficiency
+      in your organization.</p>
+    <a href="/contact/" class="button-slide bigger" style="display: inline-block; width: 260px;">
+      <span class="button-slide-decor"></span>
+      <span class="button-slide-content">
+        <span class="button-slide__icon">
+          <i class="fas fa-info-circle"></i>
         </span>
-      </a>
-    </div>
-  </section>
+        <span class="button-slide__text">Contact Us</span>
+      </span>
+    </a>
+  </div>
+</section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const statCards = document.querySelectorAll('.stat-card');
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const statCards = document.querySelectorAll('.stat-card');
 
-      statCards.forEach((card, index) => {
-        setTimeout(() => {
-          card.style.opacity = 1;
-          card.style.transform = 'translateY(0)';
-        }, 200 * index);
-      });
-
-      const progressCircles = document.querySelectorAll('.progress-circle');
-
-      progressCircles.forEach((circle) => {
-        const percent = circle.style.getPropertyValue('--percent');
-
-        circle.style.strokeDashoffset = 283;
-
-        setTimeout(() => {
-          circle.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
-          circle.style.strokeDashoffset = `calc(283 - (283 * ${percent}) / 100)`;
-        }, 500);
-      });
+    statCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.opacity = 1;
+        card.style.transform = 'translateY(0)';
+      }, 200 * index);
     });
-  </script>
-  {% endblock %}
+
+    const progressCircles = document.querySelectorAll('.progress-circle');
+
+    progressCircles.forEach((circle) => {
+      const percent = circle.style.getPropertyValue('--percent');
+
+      circle.style.strokeDashoffset = 283;
+
+      setTimeout(() => {
+        circle.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+        circle.style.strokeDashoffset = `calc(283 - (283 * ${percent}) / 100)`;
+      }, 500);
+    });
+  });
+</script>
+{% endblock %}

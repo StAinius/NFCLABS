@@ -176,9 +176,19 @@
                   {% for category in categories %}
                   <a href="{% url 'products_category' category.slug %}" class="dropdown-item">
                     <div class="product-item">
-                      {% if category.image %}
-                      <img src="{{ category.image.url }}" class="product-thumbnail" alt="{{ category.name }}">
-                      {% endif %}
+                      <div class="contact-icon-container">
+                        {% if category.image %}
+                        <div class="contact-icon general-icon"
+                          style="background: transparent; border: none; padding: 0; box-shadow: none;">
+                          <img src="{{ category.image.url }}" alt="{{ category.name }}"
+                            style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                        </div>
+                        {% else %}
+                        <div class="contact-icon general-icon">
+                          <i class="fas fa-cube"></i>
+                        </div>
+                        {% endif %}
+                      </div>
                       <span class="product-name">{{ category.name }}</span>
                     </div>
                   </a>

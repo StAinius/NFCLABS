@@ -160,12 +160,6 @@ document.addEventListener('DOMContentLoaded', function () {
       navMenu.classList.toggle('active');
     });
 
-    menuToggle.addEventListener('touchstart', function (e) {
-      e.preventDefault();
-      menuToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-
     document.addEventListener('click', function (e) {
       if (!navMenu.contains(e.target) && !menuToggle.contains(e.target) && navMenu.classList.contains('active')) {
         menuToggle.classList.remove('active');

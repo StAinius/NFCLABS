@@ -3,6 +3,7 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
+
 <div id="successMessage"
   style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:5px; z-index:9999; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
   Message sent successfully!
@@ -169,47 +170,6 @@
       <div class="description-container mb-5">
         {{ product.description|safe }}
       </div>
-
-      {% if product.files.all %}
-      <div class="border-top pt-4 mb-5">
-        <h3 class="h5 mb-3">Documentation</h3>
-        <ul class="list-unstyled">
-          {% for file in product.files.all %}
-          <li class="mb-3">
-            {% with file_ext=file.file.name|slice:"-3:" %}
-            <a href="{{ file.file.url }}" class="button-slide" download>
-              <span class="button-slide-decor"></span>
-              <span class="button-slide-content">
-                <span class="button-slide__icon">
-                  {% if file_ext == 'pdf' %}
-                  <i class="bi bi-file-earmark-pdf file-icon-pdf"></i>
-                  {% elif file_ext == 'xls' or file_ext == 'lsx' %}
-                  <i class="bi bi-file-earmark-excel file-icon-excel"></i>
-                  {% elif file_ext == 'doc' or file_ext == 'ocx' %}
-                  <i class="bi bi-file-earmark-word file-icon-word"></i>
-                  {% elif file_ext == 'ppt' or file_ext == 'ptx' %}
-                  <i class="bi bi-file-earmark-ppt file-icon-ppt"></i>
-                  {% elif file_ext == 'txt' %}
-                  <i class="bi bi-file-earmark-text file-icon-text"></i>
-                  {% elif file_ext == 'zip' or file_ext == 'rar' %}
-                  <i class="bi bi-file-earmark-zip file-icon-zip"></i>
-                  {% elif file_ext == 'png' or file_ext == 'jpg' or file_ext == 'jpeg' or file_ext == 'gif' %}
-                  <i class="bi bi-file-earmark-image file-icon-image"></i>
-                  {% elif file_ext == 'csv' %}
-                  <i class="bi bi-file-earmark-spreadsheet file-icon-spreadsheet"></i>
-                  {% else %}
-                  <i class="bi bi-file-earmark file-icon-default"></i>
-                  {% endif %}
-                </span>
-                <span class="button-slide__text">{{ file.title|default:"Download File" }}</span>
-              </span>
-            </a>
-            {% endwith %}
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
     </div>
 
     <div class="col-lg-5">
@@ -257,5 +217,51 @@
       </div>
     </div>
   </div>
+
+  {% if product.files.all %}
+  <div class="row slideIn from-left mt-4">
+    <div class="col-lg-7"></div>
+    <div class="col-lg-5">
+      <div class="border-top pt-4 mb-5">
+        <h3 class="h5 mb-3">Documentation</h3>
+        <ul class="list-unstyled">
+          {% for file in product.files.all %}
+          <li class="mb-3">
+            {% with file_ext=file.file.name|slice:"-3:" %}
+            <a href="{{ file.file.url }}" class="button-slide" download>
+              <span class="button-slide-decor"></span>
+              <span class="button-slide-content">
+                <span class="button-slide__icon">
+                  {% if file_ext == 'pdf' %}
+                  <i class="bi bi-file-earmark-pdf file-icon-pdf"></i>
+                  {% elif file_ext == 'xls' or file_ext == 'lsx' %}
+                  <i class="bi bi-file-earmark-excel file-icon-excel"></i>
+                  {% elif file_ext == 'doc' or file_ext == 'ocx' %}
+                  <i class="bi bi-file-earmark-word file-icon-word"></i>
+                  {% elif file_ext == 'ppt' or file_ext == 'ptx' %}
+                  <i class="bi bi-file-earmark-ppt file-icon-ppt"></i>
+                  {% elif file_ext == 'txt' %}
+                  <i class="bi bi-file-earmark-text file-icon-text"></i>
+                  {% elif file_ext == 'zip' or file_ext == 'rar' %}
+                  <i class="bi bi-file-earmark-zip file-icon-zip"></i>
+                  {% elif file_ext == 'png' or file_ext == 'jpg' or file_ext == 'jpeg' or file_ext == 'gif' %}
+                  <i class="bi bi-file-earmark-image file-icon-image"></i>
+                  {% elif file_ext == 'csv' %}
+                  <i class="bi bi-file-earmark-spreadsheet file-icon-spreadsheet"></i>
+                  {% else %}
+                  <i class="bi bi-file-earmark file-icon-default"></i>
+                  {% endif %}
+                </span>
+                <span class="button-slide__text">{{ file.title|default:"Download File" }}</span>
+              </span>
+            </a>
+            {% endwith %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}

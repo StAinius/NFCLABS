@@ -9,31 +9,29 @@
   }
 </style>
 
+<!-- Hero Section with Full Width -->
 <section class="hero-fullwidth slideIn from-left">
   <div class="hero-bg"></div>
   <div class="container hero-content">
     <div class="row align-items-center">
       <div class="col-lg-7">
         {% if page_content %}
-        <h1 class="hero-title">{{ page_content.title }}</h1>
-        <p class="value-statement">{{ page_content.content|safe }}</p>
+        <h1 class="hero-title">{{ page_content.title |safe }}</h1>
+        <p class="hero-subtitle">{{ page_content.content|safe }}</p>
         {% endif %}
-        <div class="d-flex flex-wrap">
-          <a href="/solutions/" class="button-slide bigger mt-4 d-inline-block mb-2">
-            <span class="button-slide-decor"></span>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="/solutions/" class="button-slide bigger mt-4 d-inline-block">
             <span class="button-slide-content">
               <span class="button-slide__icon">
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-rocket"></i>
               </span>
-              <span class="button-slide__text">Discover Our Solutions</span>
+              <span class="button-slide__text">Discover Solutions</span>
             </span>
           </a>
-          <div style="width: 20px;"></div>
-          <a href="/contact/" class="button-slide mt-4 d-inline-block mb-2">
-            <span class="button-slide-decor"></span>
+          <a href="/contact/" class="button-slide bigger mt-4 d-inline-block">
             <span class="button-slide-content">
               <span class="button-slide__icon">
-                <i class="fas fa-comments"></i>
+                <i class="fas fa-rocket"></i>
               </span>
               <span class="button-slide__text">Let's Talk</span>
             </span>
@@ -44,54 +42,57 @@
   </div>
 </section>
 
-<section class="container slideIn from-left">
+<!-- Stats Section with Full Width -->
+<section class="full-width-section slideIn from-left">
   <div class="stats-container">
-    <h2 class="stats-heading">Why Choose Our NFC Solutions?</h2>
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-        <div class="stat-title">Lightning Fast</div>
-        <div class="stat-description">Entry processes accelerated for maximum efficiency</div>
-        <div class="progress-container">
-          <svg height="140" width="140" viewbox="0 0 100 100">
-            <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
-            <circle class="progress-circle" cx="50" cy="50" r="45" style="--percent: 60"></circle>
-          </svg>
-          <div class="stat-content">
-            <div class="stat-percent">60%</div>
-            <div>Faster</div>
+    <div class="container">
+      <h2 class="stats-heading">Why Choose Our NFC Solutions?</h2>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+          <div class="stat-title">Lightning Fast</div>
+          <div class="stat-description">Entry processes accelerated for maximum efficiency</div>
+          <div class="progress-container">
+            <svg height="140" width="140" viewbox="0 0 100 100">
+              <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+              <circle class="progress-circle" cx="50" cy="50" r="45" style="--percent: 60"></circle>
+            </svg>
+            <div class="stat-content">
+              <div class="stat-percent">60%</div>
+              <div>Faster</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-coins"></i></div>
-        <div class="stat-title">Cost Effective</div>
-        <div class="stat-description">Significant reduction in administrative expenses</div>
-        <div class="progress-container">
-          <svg height="140" width="140" viewbox="0 0 100 100">
-            <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
-            <circle class="progress-circle" cx="50" cy="50" r="45" style="--percent: 40"></circle>
-          </svg>
-          <div class="stat-content">
-            <div class="stat-percent">40%</div>
-            <div>Savings</div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-coins"></i></div>
+          <div class="stat-title">Cost Effective</div>
+          <div class="stat-description">Significant reduction in administrative expenses</div>
+          <div class="progress-container">
+            <svg height="140" width="140" viewbox="0 0 100 100">
+              <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+              <circle class="progress-circle" cx="50" cy="50" r="45" style="--percent: 40"></circle>
+            </svg>
+            <div class="stat-content">
+              <div class="stat-percent">40%</div>
+              <div>Savings</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-        <div class="stat-title">Ultra Reliable</div>
-        <div class="stat-description">Enterprise-grade system you can count on</div>
-        <div class="progress-container">
-          <svg height="140" width="140" viewbox="0 0 100 100">
-            <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
-            <circle class="progress-circle" cx="50" cy="50" r="45" style="--percent: 99.9"></circle>
-          </svg>
-          <div class="stat-content">
-            <div class="stat-percent">99.9%</div>
-            <div>Uptime</div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="stat-title">Ultra Reliable</div>
+          <div class="stat-description">Enterprise-grade system you can count on</div>
+          <div class="progress-container">
+            <svg height="140" width="140" viewbox="0 0 100 100">
+              <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+              <circle class="progress-circle" cx="50" cy="50" r="45" style="--percent: 99.9"></circle>
+            </svg>
+            <div class="stat-content">
+              <div class="stat-percent">99.9%</div>
+              <div>Uptime</div>
+            </div>
           </div>
         </div>
       </div>
@@ -99,14 +100,11 @@
   </div>
 </section>
 
-
-
-
-<div class="container mt-5 narrow-container">
-  <div class="content-module card shadow border-0 p-4 slideIn from-left">
-    <div class="ribbon"><span class="ribbon-text">Our Products</span></div>
-
+<!-- Products Section -->
+<section class="container slideIn from-left" style="margin-top: 80px;">
+  <div class="content-module card shadow border-0 p-4">
     <div class="content-inner">
+      <h2 class="text-center mb-4" style="color: var(--main-blue);">Our Products</h2>
       <div class="row">
         {% for category in categories %}
         <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
@@ -119,32 +117,10 @@
                   {{ category.name }}
                 </h5>
                 <p class="small">{{ category.short_description|default:"" }}</p>
-                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                  <span class="button-slide-decor"></span>
-                  <span class="button-slide-content smaller">
-                    <span class="button-slide__icon">
-                      <i class="fas fa-info-circle"></i>
-                    </span>
-                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            <div class="mobile-product-card d-block d-sm-none" data-category-slug="{{ category.slug }}">
-              <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-              <div class="mobile-hover-content">
-                <h5 class="item-heading" title="{{ category.name }}">
-                  {{ category.name }}
-                </h5>
-                <p class="small">{{ category.short_description|default:"" }}</p>
-                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                  <span class="button-slide-decor"></span>
-                  <span class="button-slide-content smaller">
-                    <span class="button-slide__icon">
-                      <i class="fas fa-info-circle"></i>
-                    </span>
-                    <span class="button-slide__text" style="font-size: smaller;">View Products</span>
+                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2"
+                  style="width: 100%; padding: 8px 12px; font-size: 0.85rem; text-align: center;">
+                  <span class="button-slide-content">
+                    <span class="button-slide__text">View Products</span>
                   </span>
                 </a>
               </div>
@@ -156,82 +132,156 @@
       </div>
     </div>
   </div>
+</section>
 
-  <section class="container slideIn from-left">
-    <div class="about-section">
-      <div class="about-image">
-        <img src="/static/img/about.png" alt="About NFC Labs">
+<!-- About Section -->
+<section class="full-width-section slideIn from-left">
+  <div class="mission-values-section" style="padding: 80px 0;">
+    <div class="container">
+      <div class="mission-content">
+        <div class="mission-grid">
+          <div class="mission-text">
+            <h3>About NFC Labs</h3>
+            <p class="lead-text">NFC Labs is a team of young, energetic, but already experienced specialists in the
+              development of NFC solutions. We focus on efficient and innovative technologies that save your money and
+              time while opening up new opportunities.</p>
+
+            <div class="mission-highlights">
+              <div class="highlight-item">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                  <h4>Innovation Focused</h4>
+                  <p>Cutting-edge NFC, RFID, and BLE technologies for modern businesses</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-users"></i>
+                <div>
+                  <h4>Expert Team</h4>
+                  <p>Young, energetic specialists with proven experience in NFC solutions</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                  <h4>Secure Solutions</h4>
+                  <p>Enterprise-grade security for businesses of all sizes</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-section-inline">
+              <a href="/about/" class="button-slide d-inline-block" style="width: auto;">
+                <span class="button-slide-content">
+                  <span class="button-slide__icon">
+                    <i class="fas fa-info-circle"></i>
+                  </span>
+                  <span class="button-slide__text">Learn More About Us</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mission-image d-none d-md-block">
+            <div class="image-container">
+              <img src="/static/img/about.png" alt="About NFC Labs">
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="about-content">
-        <div>
-          <h2 class="mb-4">About NFC Labs</h2>
-          <p class="mb-3">NFC Labs is a team of young, energetic, but already experienced specialists in the
-            development
-            of NFC solutions. We focus on efficient and innovative technologies that save your money and time while
-            opening up new opportunities.</p>
-          <p class="mb-3">Our goal is to help you easily implement innovative solutions in your activities, whether
-            it's
-            access control, payment systems, or custom NFC applications.</p>
-          <p class="mb-4">With expertise in RFID, NFC, and BLE technologies, we create secure and user-friendly
-            solutions for businesses of all sizes.</p>
-        </div>
-        <div>
-          <a href="/about/" class="button-slide" style="display: inline-block; width: auto;">
-            <span class="button-slide-decor"></span>
-            <span class="button-slide-content">
-              <span class="button-slide__icon">
-                <i class="fas fa-info-circle"></i>
-              </span>
-              <span class="button-slide__text">Learn More About Us</span>
+      <!-- Final CTA Section -->
+      <div class="cta-content" style="margin-top: 60px;">
+        <h2 class="cta-title">Ready to Transform Your Access Control?</h2>
+        <p class="cta-text">Contact our team today to discover how NFC Labs solutions can enhance security and
+          efficiency in your organization.</p>
+        <a href="/contact/" class="button-slide bigger">
+          <span class="button-slide-content">
+            <span class="button-slide__icon">
+              <i class="fas fa-rocket"></i>
             </span>
-          </a>
-        </div>
+            <span class="button-slide__text">Get Started Today</span>
+          </span>
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cta-section slideIn from-left">
-    <div class="cta-content">
-      <h2 class="cta-title">Ready to Transform Your Access Control?</h2>
-      <p class="cta-text">Contact our team today to discover how NFC Labs solutions can enhance security and
-        efficiency
-        in your organization.</p>
-      <a href="/contact/" class="button-slide bigger" style="display: inline-block; width: 260px;">
-        <span class="button-slide-decor"></span>
-        <span class="button-slide-content">
-          <span class="button-slide__icon">
-            <i class="fas fa-info-circle"></i>
-          </span>
-          <span class="button-slide__text">Contact Us</span>
-        </span>
-      </a>
-    </div>
-  </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Stats animation
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const statCards = document.querySelectorAll('.stat-card');
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 200 * index);
+    });
 
-      statCards.forEach((card, index) => {
-        setTimeout(() => {
-          card.style.opacity = 1;
-          card.style.transform = 'translateY(0)';
-        }, 200 * index);
+    // Progress circles animation
+    const progressCircles = document.querySelectorAll('.progress-circle');
+    progressCircles.forEach((circle) => {
+      const percent = circle.style.getPropertyValue('--percent');
+      circle.style.strokeDashoffset = '283';
+
+      setTimeout(() => {
+        circle.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+        circle.style.strokeDashoffset = `calc(283 - (283 * ${percent}) / 100)`;
+      }, 500);
+    });
+
+    // Tech cards animation
+    const techCards = document.querySelectorAll('.tech-card');
+    techCards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
+      card.style.transitionDelay = `${index * 0.2}s`;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
       });
+      observer.observe(card);
+    });
 
-      const progressCircles = document.querySelectorAll('.progress-circle');
+    // Highlight items animation
+    const highlightItems = document.querySelectorAll('.highlight-item');
+    highlightItems.forEach((item, index) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateX(-20px)';
+      item.style.transition = 'all 0.6s ease';
+      item.style.transitionDelay = `${index * 0.15}s`;
 
-      progressCircles.forEach((circle) => {
-        const percent = circle.style.getPropertyValue('--percent');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateX(0)';
+          }
+        });
+      });
+      observer.observe(item);
+    });
 
-        circle.style.strokeDashoffset = 283;
-
-        setTimeout(() => {
-          circle.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
-          circle.style.strokeDashoffset = `calc(283 - (283 * ${percent}) / 100)`;
-        }, 500);
+    // Mobile product cards interaction
+    const mobileCards = document.querySelectorAll('.mobile-product-card');
+    mobileCards.forEach(card => {
+      card.addEventListener('click', function () {
+        mobileCards.forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
       });
     });
-  </script>
-  {% endblock %}
+  });
+</script>
+
+{% endblock %}

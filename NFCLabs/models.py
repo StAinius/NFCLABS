@@ -119,7 +119,7 @@ class ProductFile(models.Model):
 
 
 class ContactPage(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.TextField(max_length=200)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to='contact_pages/', blank=True, null=True)
     content = models.TextField(help_text="Puslapio turinys")

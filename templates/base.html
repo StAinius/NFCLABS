@@ -292,7 +292,7 @@
                         {% endif %}
                         <div class="contact-icon-glow"></div>
                       </div>
-                      <span class="product-name">{{ contact_page.name }}</span>
+                      <span class="product-name">{{ contact_page.name|striptags|safe }}</span>
                     </div>
                   </a>
                   {% endfor %}

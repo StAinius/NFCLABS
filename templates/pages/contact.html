@@ -1,90 +1,26 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}Contact Us - NFC Labs{% endblock %}
 
 {% block content %}
-
-<div id="successMessage"
-  style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:8px; z-index:9999; background-color:#10b981; color:white; border:none; box-shadow:0 8px 32px rgba(16,185,129,0.3);">
+<div id="successMessage" class="success-message">
   <i class="fas fa-check-circle me-2"></i>Message sent successfully!
 </div>
 
-
-<section class="cta-section slideIn from-left" style="margin-top: -24px; margin-bottom: 50px;">
+<section class="cta-section full-width-section slideIn from-left" style="margin-top: -24px; margin-bottom: 50px;">
   <div class="container mt-5 slideIn from-left">
     <div class="position-absolute top-0 end-0 opacity-10 d-none d-md-block"
       style="font-size: 120px; line-height: 1; color: white; z-index: 1; right: 20px; top: 20px;">
       <i class="fas fa-comments"></i>
     </div>
 
-    <div class="cta-content">
+    <div class="cta-content" >
       {% if page_content %}
       <h1 class="page-title">{{ page_content.title|safe }}</h1>
-        <p class="intro-text">
-          <div class="rich-content">{{ page_content.content|safe }}</div>
-        </p>
+      <p class="intro-text">
+      <div class="rich-content">{{ page_content.content|safe }}</div>
+      </p>
       {% endif %}
-
-      <div class="contact-info-grid mt-5 slideIn from-left">
-        <div class="row g-3 justify-content-center">
-          <div class="col-md-4 col-lg-2 col-12">
-            <div
-              class="contact-item d-flex align-items-center bg-white bg-opacity-10 backdrop-blur p-3 rounded-3 flex-column flex-md-row text-center text-md-start">
-              <i class="fas fa-envelope fa-lg text-white me-md-3 mb-2 mb-md-0"></i>
-              <div>
-                <h6 class="text-white mb-1 fw-semibold">Email</h6>
-                <a href="mailto:info@nfclabs.com"
-                  class="text-white text-decoration-none opacity-75 hover-opacity-100 small">info@nfclabs.com</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 col-lg-2 col-12">
-            <div
-              class="contact-item d-flex align-items-center bg-white bg-opacity-10 backdrop-blur p-3 rounded-3 flex-column flex-md-row text-center text-md-start">
-              <i class="fas fa-phone fa-lg text-white me-md-3 mb-2 mb-md-0"></i>
-              <div>
-                <h6 class="text-white mb-1 fw-semibold">Phone</h6>
-                <a href="tel:+37062111527"
-                  class="text-white text-decoration-none opacity-75 hover-opacity-100 small">+370 621 11527</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 col-lg-2 col-12">
-            <div
-              class="contact-item d-flex align-items-center bg-white bg-opacity-10 backdrop-blur p-3 rounded-3 flex-column flex-md-row text-center text-md-start">
-              <i class="fas fa-map-marker-alt fa-lg text-white me-md-3 mb-2 mb-md-0"></i>
-              <div>
-                <h6 class="text-white mb-1 fw-semibold">Location</h6>
-                <span class="text-white opacity-75 small">Vilnius, Lithuania</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 col-lg-2 col-12">
-            <div
-              class="contact-item d-flex align-items-center bg-white bg-opacity-10 backdrop-blur p-3 rounded-3 flex-column flex-md-row text-center text-md-start">
-              <i class="fas fa-building fa-lg text-white me-md-3 mb-2 mb-md-0"></i>
-              <div>
-                <h6 class="text-white mb-1 fw-semibold">Company</h6>
-                <span class="text-white opacity-75 small">303193625</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 col-lg-2 col-12">
-            <div
-              class="contact-item d-flex align-items-center bg-white bg-opacity-10 backdrop-blur p-3 rounded-3 flex-column flex-md-row text-center text-md-start">
-              <i class="fas fa-receipt fa-lg text-white me-md-3 mb-2 mb-md-0"></i>
-              <div>
-                <h6 class="text-white mb-1 fw-semibold">VAT</h6>
-                <span class="text-white opacity-75 small">LT100008249813</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div
         style="position: absolute; width: 150px; height: 150px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.05); top: 20px; left: 20px;">
@@ -96,108 +32,187 @@
   </div>
 </section>
 
+<section class="full-width-section slideIn from-left">
+  <div class="contact-info-section">
+    <div class="container">
+      <h2 class="contact-info-heading">Connect With Us</h2>
 
-<section class="contact-options py-5 bg-light slideIn from-left">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="h3 fw-bold text-dark mb-3">Choose Your Contact Method</h2>
-      <p class="text-muted">Select the most convenient way to reach out to us</p>
-    </div>
+      <div class="key-contact-info-grid">
+        <div class="key-info-card">
+          <i class="fas fa-envelope-open-text"></i>
+          <h4>General Inquiries</h4>
+          <p>Have a question or need more information? Our team is ready to assist you.</p>
+          <a href="mailto:info@nfclabs.com">info@nfclabs.com</a>
+        </div>
 
-    <div class="row justify-content-center">
-      {% for contact_page in contact_pages %}
-      <div class="col-md-4 col-lg-3 mb-4">
-        <a href="{% url 'contact_detail' contact_page.slug %}"
-          class="contact-option-card d-block text-decoration-none h-100">
-          <div class="card border-0 shadow-sm hover-lift h-100" style="transition: all 0.3s ease;">
-            <div class="card-body text-center p-4">
-              <div
-                class="icon-circle bg-gradient-primary d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-                style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--nfc-teal), var(--nfc-teal-dark));">
-                <i class="fas fa-address-card fa-lg text-white"></i>
-              </div>
-              <h5 class="card-title text-dark mb-0">{{ contact_page.name }}</h5>
-            </div>
-          </div>
-        </a>
+        <div class="key-info-card">
+          <i class="fas fa-phone-volume"></i>
+          <h4>Talk to an Expert</h4>
+          <p>Speak directly with our specialists for detailed solutions and support.</p>
+          <a href="tel:+37062111527">+370 621 11527</a>
+        </div>
+
+        <div class="key-info-card">
+          <i class="fas fa-map-marked-alt"></i>
+          <h4>Our Office</h4>
+          <p>Find us in the heart of the Baltics, ready to welcome you.</p>
+          <p>Vilnius, Lithuania</p>
+        </div>
       </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
 
-<section class="main-contact py-5 slideIn from-left">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-xl-7">
-        <div class="contact-form-section">
-
-          <div class="card border-0">
-            <div class="card-header text-center py-3">
-              <h3 class="h4 mb-0">Send Us a Message</h3>
-            </div>
-            <div class="card-body p-4">
-              <form id="contactForm" method="post">
-                {% csrf_token %}
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="company" class="form-label">Company</label>
-                    <input type="text" class="form-control" id="company" name="company">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="phone" class="form-label">Phone</label>
-                    <input type="tel" class="form-control" id="phone" name="phone">
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label for="subject" class="form-label">Subject <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="subject" name="subject" required>
-                  </div>
-                  <div class="col-12 mb-3">
-                    <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
-                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-                  </div>
-                  <div class="col-12 mb-4">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
-                      <label class="form-check-label" for="privacy">
-                        I agree to the processing of my personal data in accordance with the privacy policy
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-12 mb-4">
-                    <div class="captcha-container">
-                      <div id="recaptcha-container" class="d-flex justify-content-center"></div>
-                      <p class="captcha-text text-center text-muted small mt-2">Please complete the CAPTCHA to verify
-                        you're not a robot</p>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-primary w-100 submit-btn">
-                      <i class="fa fa-paper-plane me-2"></i>Send Message
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+      <div class="additional-info-grid">
+        <div class="additional-info-card">
+          <div class="icon">
+            <i class="fas fa-building"></i>
           </div>
+          <h5>Company Code</h5>
+          <p>303193625</p>
+        </div>
+        <div class="additional-info-card">
+          <div class="icon">
+            <i class="fas fa-receipt"></i>
+          </div>
+          <h5>VAT Number</h5>
+          <p>LT100008249813</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<style>
-  .side-banner {
-    display: none !important;
-  }
-</style>
+<section class="contact-links-section">
+  <div class="container">
+    <div class="contact-links-grid">
+      <a href="/contact/become-our-partner/" class="interactive-link-card">
+        <i class="fas fa-handshake"></i>
+        <h3>Become Our Partner</h3>
+        <p>Explore partnership opportunities and grow your business with NFC Labs.</p>
+      </a>
+
+      <a href="/contact/access-control-together/" class="interactive-link-card">
+        <i class="fas fa-rocket"></i>
+        <h3>Let's Shape Together</h3>
+        <p>Collaborate on innovative projects and bring new ideas to life.</p>
+      </a>
+
+      <a href="/contact/request-a-product-quote/" class="interactive-link-card">
+        <i class="fas fa-calculator"></i>
+        <h3>Request a Quote</h3>
+        <p>Get a detailed quote for our products and services tailored to your needs.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="contact-form-section full-width-section slideIn from-left">
+  <div class="container">
+    <div class="form-container">
+      <div class="form-content">
+        <h2 class="form-title">Send Us a Message</h2>
+        <p class="form-subtitle">Ready to transform your business with NFC technology? Let's discuss your project.</p>
+
+        <form id="contactForm" class="contact-form" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label">Name *</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="company" class="form-label">Company</label>
+              <input type="text" class="form-control" id="company" name="company" placeholder="Your company name">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="tel" class="form-control" id="phone" name="phone" placeholder="+370 XXX XXXXX">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject *</label>
+            <input type="text" class="form-control" id="subject" name="subject"
+              placeholder="What can we help you with?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message *</label>
+            <textarea class="form-control" id="message" name="message"
+              placeholder="Tell us about your project requirements, goals, and any specific questions you have..."
+              required></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input class="checkbox-input" type="checkbox" id="privacy" name="privacy" required>
+            <label class="checkbox-label" for="privacy">
+              I agree to the processing of my personal data in accordance with the privacy policy *
+            </label>
+          </div>
+
+          <button type="submit" class="button-slide bigger">
+            <span class="button-slide-content">
+              <span class="button-slide__icon">
+                <i class="fas fa-paper-plane"></i>
+              </span>
+              <span class="button-slide__text">Send Message</span>
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    });
+
+    const contactCards = document.querySelectorAll('.key-info-card, .additional-info-card, .interactive-link-card');
+    contactCards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
+      card.style.transitionDelay = `${index * 0.05}s`;
+      observer.observe(card);
+    });
+
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const submitButton = contactForm.querySelector('.button-slide');
+      const originalText = submitButton.innerHTML;
+
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>';
+
+      setTimeout(() => {
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 5000);
+
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalText;
+        contactForm.reset();
+      }, 1500);
+    });
+  });
+</script>
 
 {% endblock %}

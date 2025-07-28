@@ -224,9 +224,19 @@
                   {% for solution in solutions %}
                   <a href="{% url 'solution_detail' solution.slug %}" class="dropdown-item">
                     <div class="product-item">
-                      {% if solution.image %}
-                      <img src="{{ solution.image.url }}" class="product-thumbnail" alt="{{ solution.name }}">
-                      {% endif %}
+                      <div class="contact-icon-container">
+                        {% if solution.image %}
+                        <div class="contact-icon general-icon"
+                          style="background: transparent; border: none; padding: 0; box-shadow: none;">
+                          <img src="{{ solution.image.url }}" alt="{{ solution.name }}"
+                            style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                        </div>
+                        {% else %}
+                        <div class="contact-icon general-icon">
+                          <i class="fas fa-cube"></i>
+                        </div>
+                        {% endif %}
+                      </div>
                       <span class="product-name">{{ solution.name }}</span>
                     </div>
                   </a>

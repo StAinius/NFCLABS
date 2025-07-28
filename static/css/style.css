@@ -1922,7 +1922,7 @@ textarea.form-control {
 .solution-hero-image {
   background-color: none;
   max-width: 500px;
-  max-height: 500px;
+  max-height: auto;
   width: 100%;
   height: auto;
   border-radius: 8px;

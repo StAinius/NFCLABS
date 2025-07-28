@@ -609,6 +609,26 @@ footer .list-unstyled a {
   transition: all 0.3s ease;
 }
 
+.form-controls,
+.form-select {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  border-radius: 8px;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-controls,
+.form-select {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+
 .form-control:focus,
 .form-select:focus {
   outline: none;

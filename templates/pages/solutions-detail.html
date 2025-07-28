@@ -80,24 +80,24 @@
                         <input type="hidden" name="product_interest" value="{{ solution.name }}">
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email Address <span
+                            <label for="email" class="form-label" style="color: black;">Email Address <span
                                     class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="email" name="email"
+                            <input type="email" class="form-controls" id="email" name="email"
                                 placeholder="your@email.com" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="message" class="form-label">Your Message <span
+                            <label for="message" class="form-label" style="color: black;">Your Message <span
                                     class="text-danger">*</span></label>
-                            <textarea class="form-control" id="message" name="message" rows="4"
+                            <textarea class="form-controls" id="message" name="message" rows="4"
                                 placeholder="How can we help you with {{ solution.name }}?" required></textarea>
                         </div>
 
                         <div class="mb-4">
                             <div class="form-check">
                                 <input class="form-check-input" style="width: 2.25rem;" type="checkbox" id="privacy"
-                                    name="privacy" required>
-                                <label class="form-check-label" for="privacy">
+                                    name="privacy" required >
+                                <label class="form-check-label" for="privacy" style="color: black;">
                                     I agree to the processing of my personal data in accordance with the privacy policy
                                 </label>
                             </div>
@@ -120,62 +120,36 @@
     </div>
 </div>
 
-<div class="container mt-5 narrow-container">
-    <hr class="gray-divider mb-4">
-
-    <div class="content-module card shadow border-0 p-4 slideIn from-left">
-        <div class="ribbon"><span class="ribbon-text">You May Also Like</span></div>
-
-        <div class="content-inner">
-            <div class="row">
-                {% for category in categories %}
-                <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
-                    <div class="showcase-item">
-                        {% if category.image %}
-                        <div class="media-container d-none d-sm-block">
-                            <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-                            <div class="hover-content">
-                                <h5 class="mobile-item-heading" title="{{ category.name }}">
-                                    {{ category.name }}
-                                </h5>
-                                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                                    <span class="button-slide-decor"></span>
-                                    <span class="button-slide-content smaller">
-                                        <span class="button-slide__icon">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                        <span class="button-slide__text" style="font-size: smaller;">View
-                                            Products</span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="mobile-product-card d-block d-sm-none" data-category-slug="{{ category.slug }}">
-                            <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
-                            <div class="mobile-hover-content">
-                                <h5 class="item-heading" title="{{ category.name }}">
-                                    {{ category.name }}
-                                </h5>
-                                <p class="small">{{ category.short_description|default:"" }}</p>
-                                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2">
-                                    <span class="button-slide-decor"></span>
-                                    <span class="button-slide-content smaller">
-                                        <span class="button-slide__icon">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                        <span class="button-slide__text" style="font-size: smaller;">View
-                                            Products</span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                {% endfor %}
+<section class="container slideIn from-left" style="margin-top: 80px;">
+  <div class="content-module card shadow border-0 p-4">
+    <div class="content-inner">
+      <h2 class="text-center mb-4" style="color: var(--main-blue);">You May Also Like</h2>
+      <div class="row">
+        {% for category in categories %}
+        <div class="col-sm-6 col-md-4 col-lg-20p mb-4">
+          <div class="showcase-item">
+            {% if category.image %}
+            <div class="media-container d-none d-sm-block">
+              <img src="{{ category.image.url }}" class="display-image" alt="{{ category.name }}">
+              <div class="hover-content">
+                <h5 class="item-heading" title="{{ category.name }}">
+                  {{ category.name }}
+                </h5>
+                <p class="small">{{ category.short_description|default:"" }}</p>
+                <a href="{% url 'products_category' category.slug %}" class="button-slide mt-2"
+                  style="width: 100%; padding: 8px 12px; font-size: 0.85rem; text-align: center;">
+                  <span class="button-slide-content">
+                    <span class="button-slide__text">View Products</span>
+                  </span>
+                </a>
+              </div>
             </div>
+            {% endif %}
+          </div>
         </div>
+        {% endfor %}
+      </div>
     </div>
-</div>
+  </div>
+</section>
 {% endblock %}

@@ -161,7 +161,7 @@ footer .list-unstyled a {
   margin-bottom: 1.5rem;
   line-height: 1.2;
   position: relative;
-  width: 1000px;
+  max-width: 950px;
   padding-right: 2rem;
 }
 
@@ -756,7 +756,7 @@ textarea.form-control {
   align-items: center;
   background: linear-gradient(45deg, var(--nfc-teal), var(--nfc-teal-dark));
   color: white;
-  padding: 18px 40px;
+  padding: 6px 12px !important;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
@@ -767,7 +767,7 @@ textarea.form-control {
   cursor: pointer;
   width: 100%;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 0.8rem !important;
 }
 
 .button-slide::before {
@@ -790,8 +790,8 @@ textarea.form-control {
 }
 
 .button-slide.bigger {
-  padding: 20px 50px;
-  font-size: 1.2rem;
+  padding: 8px 16px !important;
+  font-size: 0.85rem !important;
 }
 
 .button-slide-content {
@@ -846,13 +846,13 @@ textarea.form-control {
 .submit-btn {
   display: block;
   width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: 0.5rem 1rem !important;
   border: none;
   border-radius: 8px;
   background: linear-gradient(135deg, var(--nfc-teal) 0%, var(--nfc-teal-dark) 100%);
   color: white;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.8rem !important;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 2rem;
